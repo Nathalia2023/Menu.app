@@ -1,0 +1,214 @@
+/* Estilos para el banner principal */
+.main-banner {
+    position: relative;
+    width: 100%;
+    height: 300px;
+    overflow: hidden;
+}
+
+.banner-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.banner-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+    font-size: 3rem;
+    font-weight: bold;
+    text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.7);
+}
+
+/* Barra de búsqueda, filtros y carrito */
+.filters-bar {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 15px 40px;
+    background-color: #fff;
+    border-bottom: 2px solid #e1e1e1;
+    gap: 20px;  /* Espacio entre los elementos */
+    flex-wrap: wrap;  /* Permite que los elementos se ajusten a la pantalla */
+}
+
+.search-container {
+    display: flex;
+    align-items: center;
+    border: 1px solid #ccc;
+    border-radius: 30px;
+    padding: 10px 20px;
+    flex: 1;  /* Ocupa el espacio disponible */
+    max-width: 500px;  /* Asegura que la caja de búsqueda no sea demasiado grande */
+}
+
+.search-input {
+    border: none;
+    outline: none;
+    padding: 5px;
+    border-radius: 30px;
+    width: 100%;
+    font-size: 14px; /* Texto más pequeño */
+}
+
+.search-button {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+}
+
+.search-icon {
+    width: 18px;  /* Icono más pequeño */
+    height: 18px;
+}
+
+/* Menú de filtros al lado del buscador */
+.menu-filters {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.filter-button {
+    padding: 8px 18px;  /* Menos padding para hacer el botón más pequeño */
+    background-color: #f0f0f0;
+    border: 1px solid #ddd;
+    border-radius: 30px;
+    cursor: pointer;
+    font-size: 12px;  /* Texto más pequeño */
+    transition: background-color 0.3s ease;
+    min-width: 120px;  /* Establece el mismo ancho para todos los botones */
+    text-align: center;
+}
+
+.filter-button:hover {
+    background-color: #007bff;
+    color: white;
+}
+
+.filter-button.active {
+    background-color: #007bff;
+    color: white;
+}
+
+/* Menú desplegable de dietas */
+.dietary-filter {
+    position: relative;
+}
+
+.dropdown-button {
+    background-color: #f9f9f9;
+    border: 1px solid #ccc;
+    border-radius: 30px;
+    padding: 8px 18px;  /* Menos padding para hacer el botón más pequeño */
+    font-size: 12px;  /* Texto más pequeño */
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    min-width: 120px;  /* Asegura que tenga el mismo ancho */
+}
+
+.dropdown-arrow {
+    font-size: 10px;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    padding: 8px;
+    width: 180px;
+    box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.dietary-filter:hover .dropdown-content {
+    display: block;
+}
+
+.dropdown-content label {
+    display: block;
+    margin-bottom: 6px;  /* Menos espacio entre las etiquetas */
+    font-size: 12px;  /* Texto más pequeño */
+}
+
+/* Flecha de entrega y carrito de compras alineados */
+.delivery-time-cart-container {
+    display: flex;
+    align-items: center;
+    gap: 20px; /* Espacio entre la flecha y el carrito */
+    justify-content: flex-end; /* Alineación a la derecha */
+    flex: 1; /* Permite que los elementos se ajusten al ancho disponible */
+}
+
+.arrow-button {
+    background-color: transparent;
+    border: none;
+    font-size: 18px;  /* Texto más pequeño */
+    cursor: pointer;
+}
+
+/* Carrito de compras */
+.cart-button-container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.cart-button {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.cart-icon {
+    width: 22px;  /* Icono más pequeño */
+    height: 22px;
+}
+
+.cart-count {
+    position: absolute;
+    top: -4px;
+    right: -4px;
+    background-color: red;
+    color: white;
+    border-radius: 50%;
+    padding: 3px 6px;
+    font-size: 10px;  /* Número más pequeño */
+}
+
+/* Checkout */
+.checkout-container {
+    display: flex;
+    align-items: center;
+    gap: 20px; /* Espacio entre los elementos */
+    justify-content: flex-end;  /* Alineación a la derecha */
+    flex: 1;  /* Ajusta el contenedor para que el botón de checkout ocupe el espacio disponible */
+}
+
+.checkout-button {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 20px;  /* Menos padding para que quepa bien */
+    border-radius: 30px;
+    border: none;
+    cursor: pointer;
+    font-size: 14px;  /* Texto más pequeño */
+    min-width: 150px; /* Asegura que todos los botones tengan el mismo ancho */
+    text-align: center;
+    transition: background-color 0.3s ease;
+}
+
+.checkout-button:hover {
+    background-color: #45a049;
+}

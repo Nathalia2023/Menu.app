@@ -1,0 +1,57 @@
+/* General header styles */
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    background-color: #f8f8f8;
+  }
+  
+  .logo-container {
+    display: flex;
+    align-items: center;
+  }
+  
+  .logo {
+    height: 50px;
+  }
+  
+  .order-now-container {
+    margin-left: 20px;
+  }
+  
+  .order-now-btn {
+    background-color: white;
+    border: 2px solid black;
+    padding: 10px 20px;
+    border-radius: 25px;
+    cursor: pointer;
+    font-size: 16px;
+  }
+  
+  .nav-container {
+    display: flex;
+    align-items: center;
+  }
+  
+  .quick-quote,
+  .login-signout {
+    margin-right: 20px;
+  }
+  
+  .quote-btn,
+  .login-btn,
+  .signout-btn {
+    background-color: transparent;
+    border: none;
+    font-size: 16px;
+    cursor: pointer;
+  }
+  
+  .menu-icon .hamburger-menu {
+    background-color: transparent;
+    border: none;
+    font-size: 30px;
+    cursor: pointer;
+  }
+  
