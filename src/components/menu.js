@@ -1,41 +1,69 @@
 import React from "react";
-import MenuCategory from "./MenuCategory";
-import "./menu.css";
 
-const menuData = [
-  {
-    title: "Breakfast and Tea Collections",
-    items: [
-      { name: "Breakfast Canapes Collection", price: "$48.00", image: "images/image1.jpg", tags: ["NF"] },
-      { name: "Breakfast Pots", price: "From $8.50", image: "images/image2.jpg", tags: ["12 NF"] },
-      { name: "Team Breakfast Collection", price: "$78.00", image: "images/image3.jpg", tags: ["V", "H", "SF"] },
-      { name: "Savoury Breakfast Bruschetta and Frittata Collection", price: "$129.00", image: "images/image4.jpg", tags: ["8 NF"] },
-      { name: "Loaded Mini Muffins", price: "From $46.00", image: "images/image5.jpg", tags: ["12 V", "NF"] },
-      { name: "Savoury Breakfast Bruschetta Collection", price: "$102.00", image: "images/image6.jpg", tags: ["8 NF"] },
-      { name: "Breakfast Pastry Collection", price: "$124.00", image: "images/image7.jpg", tags: ["12"] },
-      { name: "Petit Frittata Collection", price: "$48.00", image: "images/image8.jpg", tags: ["GF", "NF"] },
-      { name: "Quiche Collection", price: "From $38.00", image: "images/image9.jpg", tags: ["6-20 NF"] },
-      { name: "Savoury Galettes", price: "$79.00", image: "images/image10.jpg", tags: ["12 NF"] },
-    ],
-  },
-  {
-    title: "AM / PM Tea - Sweet",
-    items: [
-      { name: "Winter Tea Collection", price: "$88.00", image: "images/image11.jpg", tags: ["12 V", "H", "CF", "AF", "SF"] },
-      { name: "Autumnal Sweet Collection", price: "From $82.00", image: "images/image12.jpg", tags: ["14 CF", "SF"] },
-      { name: "Donut Collection", price: "$112.00", image: "images/image13.jpg", tags: ["12 V", "H"] },
-      { name: "Luxe French Patisserie", price: "$102.00", image: "images/image14.jpg", tags: ["15 V", "H", "CF", "AF"] },
-      { name: "Best Ever Brownies", price: "From $68.00", image: "images/image15.jpg", tags: ["14"] },
-    ],
-  },
-];
+const Menu = ({ setCart }) => {
+  const categories = [
+    {
+      title: "Breakfast and Tea Collections",
+      products: [
+        { name: "Breakfast Canapés Collection", price: 48.0, image: "/images/canapes.jpg", tags: ["New"], metadata: ["NF"] },
+        { name: "Breakfast Pots", price: 8.5, image: "/images/pots.jpg", tags: ["New Flavours"], metadata: ["12", "V", "NF", "SF"] },
+        { name: "Team Breakfast Collection", price: 78.0, image: "/images/team.jpg", tags: ["New"], metadata: ["4", "V", "SF"] },
+        { name: "Savoury Breakfast Bruschetta and Frittata Collection", price: 129.0, image: "/images/bruschetta.jpg", metadata: ["NF"] },
+        { name: "Loaded Mini Muffins", price: 46.0, image: "/images/muffins.jpg", tags: ["New"], metadata: ["12", "NF"] },
+        { name: "Savoury Breakfast Bruschetta Collection", price: 102.0, image: "/images/bruschetta-collection.jpg", metadata: ["NF"] },
+        { name: "Breakfast Pastry Collection", price: 124.0, image: "/images/pastry.jpg", metadata: ["12"] },
+        { name: "Petit Frittata Collection", price: 48.0, image: "/images/frittata.jpg", metadata: ["GF", "NF", "H"] },
+        { name: "Quiche Collection", price: 38.0, image: "/images/quiche.jpg", metadata: ["6-20", "NF"] },
+        { name: "Savoury Galettes", price: 79.0, image: "/images/galettes.jpg", metadata: ["12", "NF"] },
+      ],
+    },
+    {
+      title: "AM / PM Tea - Sweet",
+      products: [
+        { name: "Winter Tea Collection", price: 88.0, image: "/images/winter.jpg", metadata: ["12", "V", "H", "CF", "AF", "SF"] },
+        { name: "Autumnal Sweet Collection", price: 88.0, image: "/images/autumnal.jpg", metadata: ["14", "CF", "AF", "SF"] },
+        { name: "Donut Collection", price: 112.0, image: "/images/donuts.jpg", metadata: ["12", "V"] },
+        { name: "Luxe French Patisserie", price: 102.0, image: "/images/patisserie.jpg", metadata: ["14"] },
+        { name: "Best Ever Brownies", price: 68.0, image: "/images/brownies.jpg", tags: ["New"], metadata: ["12", "V", "H", "CF", "AF", "SF"] },
+      ],
+    },
+  ];
 
-const Menu = () => {
   return (
     <div className="menu">
-      {menuData.map((category, index) => (
-        <MenuCategory key={index} {...category} />
+      <div className="menu-header">
+        <h1>Breakfast and Teas</h1>
+        <button className="browse-button">Browse all</button>
+      </div>
+      {categories.map((category, index) => (
+        <div className="category" key={index}>
+          <h2>{category.title}</h2>
+          <div className="products">
+            {category.products.map((product, i) => (
+              <div className="menu-item" key={i}>
+                <div className="image-container">
+                  <img src={product.image} alt={product.name} />
+                  {product.tags && (
+                    <div className="tags">
+                      {product.tags.map((tag, idx) => (
+                        <span key={idx} className="tag">{tag}</span>
+                      ))}
+                    </div>
+                  )}
+                </div>
+                <h3>{product.name}</h3>
+                <div className="metadata">
+                  {product.metadata.map((meta, idx) => (
+                    <span key={idx} className="meta">{meta}</span>
+                  ))}
+                </div>
+                <p>From ${product.price.toFixed(2)}</p>
+              </div>
+            ))}
+          </div>
+        </div>
       ))}
+      <button className="expand-button">Expand</button>
     </div>
   );
 };

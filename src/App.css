@@ -1,38 +1,719 @@
-.App {
+/* Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Arial', sans-serif;
+  background-color: #f8f8f8; /* Color de fondo general */
+}
+/* Header */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #fff;
+  padding: 10px 20px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.logo-container {
+  display: flex;
+  align-items: center;
+  gap: 10px; /* Espacio entre el logo y el botón */
+}
+
+.logo {
+  height: 50px;
+}
+
+.order-now {
+  background-color: white;
+  color: black;
+  border: 2px solid black;
+  border-radius: 50px;
+  padding: 8px 20px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.quick-quote {
+  font-size: 14px;
+  font-weight: bold;
+  color: #0071bc;
+}
+
+.auth-buttons {
+  display: flex;
+  gap: 10px;
+}
+
+.auth-buttons button {
+  background-color: transparent;
+  color: #0071bc;
+  border: 1px solid #0071bc;
+  padding: 8px 15px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.hamburger-menu img {
+  width: 25px;
+  height: 25px;
+  cursor: pointer;
+}
+
+
+/* Banner */
+.banner {
+  position: relative;
   text-align: center;
+  margin-top: 20px;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.banner img {
+  width: 100%;
+  height: 400px;
+  object-fit: cover;
+  border-radius: 8px;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.banner h1 {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 3rem;
+  color: white;
+  text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.6);
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+/* Main Content */
+.main-content {
   display: flex;
   flex-direction: column;
+  gap: 20px;
+}
+
+.filters-cart-container {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  margin-top: 20px;
+}
+
+/* estilos menu*/
+/* General layout */
+.menu {
+  padding: 20px;
+  font-family: Arial, sans-serif;
+  background-color: #fff;
+}
+
+.menu-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.menu-header h1 {
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.browse-button {
+  background-color: #0073e6;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.browse-button:hover {
+  background-color: #005bb5;
+}
+
+/* Categories */
+.category {
+  margin-bottom: 30px;
+}
+
+.category h2 {
+  font-size: 20px;
+  margin-bottom: 15px;
+  font-weight: bold;
+}
+
+.products {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 20px;
+}
+
+/* Product cards */
+.menu-item {
+  background-color: #f9f9f9;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  text-align: center;
+  padding: 10px;
+  transition: box-shadow 0.2s;
+}
+
+.menu-item:hover {
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.image-container {
+  position: relative;
+}
+
+.image-container img {
+  width: 100%;
+  border-radius: 8px 8px 0 0;
+  height: 150px;
+  object-fit: cover;
+}
+
+.tags {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  display: flex;
+  gap: 5px;
+}
+
+.tag {
+  background-color: #0073e6;
+  color: white;
+  font-size: 12px;
+  padding: 2px 6px;
+  border-radius: 4px;
+}
+
+/* Metadata */
+.metadata {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin: 10px 0;
+}
+
+.meta {
+  font-size: 12px;
+  color: #555;
+  background-color: #f1f1f1;
+  padding: 3px 6px;
+  border-radius: 4px;
+}
+
+/* Expand button */
+.expand-button {
+  display: block;
+  margin: 20px auto;
+  background-color: #e0e0e0;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.expand-button:hover {
+  background-color: #d0d0d0;
+}
+/*fin de estilos menu*/
+
+.cart {
+  position: sticky;
+  top: 100px;
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  width: 300px;
+}
+
+.cart h2 {
+  margin-bottom: 10px;
+  font-size: 1.2rem;
+}
+
+.cart ul {
+  list-style-type: none;
+}
+
+.cart ul li {
+  font-size: 0.9rem;
+  color: #555;
+  margin-bottom: 5px;
+}
+
+.cart .total {
+  margin-top: 10px;
+  font-weight: bold;
+  font-size: 1.2rem;
+  color: #333;
+}
+
+/* Contenedor principal */
+.filter-section {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 20px;
+  background-color: #f8f8f8;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  width: 100%; /* Ocupa todo el espacio */
+}
+
+/* Barra de búsqueda */
+.search-container {
+  display: flex;
+  align-items: center;
+  flex: 1;
+  max-width: 300px; /* Ajusta según tu diseño */
+}
+
+.search-input {
+  flex: 1;
+  padding: 8px 12px;
+  border: 1px solid #ddd;
+  border-radius: 20px 0 0 20px;
+  font-size: 14px;
+}
+
+.search-button {
+  background-color: #f4f9fd;
+  border: none;
+  border-radius: 0 20px 20px 0;
+  padding: 8px 12px;
+  display: flex;
   align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
+  cursor: pointer;
+}
+
+.search-button img {
+  width: 16px;
+  height: 16px;
+}
+
+/* Botones de categorías */
+.category-buttons {
+  display: flex;
+  gap: 10px;
+  flex: 3; /* Ocupa más espacio para estirar los botones */
+  justify-content: center;
+}
+
+.category-button {
+  padding: 8px 16px;
+  border: none;
+  border-radius: 20px;
+  background-color: #e9e9e9;
+  color: #333;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.category-button:hover {
+  background-color: #d1d1d1;
+}
+
+.category-button.dietary {
+  background-color: #007bff;
   color: white;
 }
-
-.App-link {
-  color: #61dafb;
+.filters-cart-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start; /* Alinea los elementos en la parte superior */
+  gap: 20px; /* Espaciado entre filtros y carrito */
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+.filter-section {
+  flex-grow: 1; /* Ocupa todo el espacio disponible hasta el carrito */
+  background-color: #f8f8f8; /* Color de fondo para diferenciación */
+  padding: 20px; /* Espaciado interno */
+  border-radius: 8px; /* Bordes redondeados */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Sombra para estética */
+}
+
+.cart {
+  width: 350px; /* Ancho fijo del carrito */
+  background-color: #ffffff;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 16px;
+  font-family: Arial, sans-serif;
+  flex-shrink: 0; /* Evita que el carrito se reduzca */
+}
+
+
+/* Botón con flecha */
+.arrow-button-container {
+  flex-shrink: 0; /* Mantén el botón al final */
+}
+
+.arrow-button {
+  background-color: #f9fbfd;
+  border: none;
+  border-radius: 50%;
+  width: 20px;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.arrow-button img {
+  width: 40px;
+  height: 40px;
+}
+/*estilo para carrito de compras*/
+.cart {
+  width: 320px;
+  background-color: #ffffff;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 16px;
+  font-family: Arial, sans-serif;
+}
+
+.cart-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.cart-header-icon {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.cart-header-icon img {
+  width: 24px;
+  height: 24px;
+}
+
+.cart-total {
+  font-size: 18px;
+  font-weight: bold;
+  color: #333;
+}
+
+.checkout-button {
+  background-color: #f7f8fa;
+  color: rgb(10, 10, 10);
+  border-color: black;
+  border-radius: 4px;
+  padding: 8px 16px;
+  cursor: pointer;
+}
+
+.checkout-button:hover {
+  background-color: #0056b3;
+}
+
+.delivery-time-btn {
+  background-color: #e6f2ff;
+  color: #007bff;
+  border: none;
+  border-radius: 4px;
+  padding: 8px;
+  width: 100%;
+  margin: 12px 0;
+  cursor: pointer;
+}
+
+.cart-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.cart-item {
+  margin-bottom: 12px;
+}
+
+.item-details {
+  display: flex;
+  flex-direction: column;
+}
+
+.item-header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 4px;
+}
+
+.item-quantity {
+  font-weight: bold;
+}
+
+.item-name {
+  font-size: 14px;
+  color: #555;
+  flex-grow: 1;
+  margin-left: 8px;
+}
+
+.item-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.item-price {
+  font-size: 14px;
+  font-weight: bold;
+}
+
+.delete-icon {
+  width: 16px;
+  height: 16px;
+  cursor: pointer;
+}
+
+.item-divider {
+  border: none;
+  border-top: 1px solid #ddd;
+  margin: 12px 0;
+}
+
+.cart-summary {
+  margin-top: 16px;
+  border-top: 1px solid #ddd;
+  padding-top: 12px;
+}
+
+.summary-line {
+  display: flex;
+  justify-content: space-between;
+  margin: 4px 0;
+}
+
+.summary-total {
+  display: flex;
+  justify-content: space-between;
+  font-weight: bold;
+  margin-top: 8px;
+  font-size: 16px;
+}
+
+.delivery-info {
+  margin-top: 16px;
+  font-size: 12px;
+  color: #555;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.see-locations-btn {
+  background: none;
+  color: #007bff;
+  border: none;
+  font-size: 12px;
+  cursor: pointer;
+}
+.cart-icon-wrapper {
+  position: relative; /* Para poder posicionar el círculo */
+  display: flex;
+  align-items: center;
+}
+
+.cart-icon-wrapper img {
+  width: 24px; /* Tamaño del ícono del carrito */
+  height: 24px;
+}
+
+.cart-badge {
+  position: absolute; /* Coloca el círculo encima del carrito */
+  top: -4px; /* Ajusta la posición vertical */
+  right: -4px; /* Ajusta la posición horizontal */
+  background-color: #007bff; /* Color azul del círculo */
+  color: white; /* Texto blanco */
+  font-size: 12px; /* Tamaño del texto dentro del círculo */
+  font-weight: bold; /* Texto en negrita */
+  border-radius: 50%; /* Hace que sea un círculo */
+  width: 20px; /* Ancho del círculo */
+  height: 20px; /* Alto del círculo */
+  display: flex; /* Para centrar el número dentro */
+  justify-content: center; /* Centra horizontalmente */
+  align-items: center; /* Centra verticalmente */
+}
+.delivery-time-btn {
+  background-color: #007bff; /* Fondo azul del botón */
+  color: white; /* Texto blanco */
+  border: none;
+  border-radius: 4px; /* Bordes redondeados */
+  padding: 8px; /* Espaciado interno */
+  width: 100%; /* Ocupa todo el ancho del contenedor */
+  margin: 12px 0; /* Margen vertical */
+  cursor: pointer; /* Cambia el cursor al pasar sobre el botón */
+  display: flex; /* Permite alinear elementos internos */
+  align-items: center; /* Centra verticalmente el contenido */
+  gap: 8px; /* Espacio entre el ícono y el texto */
+}
+
+.calendar-icon {
+  width: 16px; /* Tamaño del ícono */
+  height: 16px;
+}
+/* Carrito de compras */
+.cart-item {
+  margin-bottom: 12px;
+}
+
+.item-details {
+  display: flex;
+  flex-direction: column;
+}
+
+.item-header {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  margin-bottom: 5px;
+}
+
+.item-quantity {
+  font-weight: bold;
+  margin-right: 10px; /* Espacio entre la cantidad y el botón */
+}
+
+.edit-button {
+  background-color: #d3d3d3; /* Fondo gris claro */
+  color: black;
+  font-weight: bold;
+  padding: 4px 8px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 12px; /* Tamaño pequeño para el botón */
+  margin-left: 10px; /* Espacio entre el botón de edición y el nombre */
+}
+
+.item-name {
+  font-size: 14px;
+  color: #555;
+  margin-left: 10px; /* Espacio entre el nombre y el botón */
+}
+
+.item-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.item-price {
+  font-size: 14px;
+  font-weight: bold;
+}
+
+.delete-icon {
+  width: 16px;
+  height: 16px;
+  cursor: pointer;
+}
+
+.item-divider {
+  border: none;
+  border-top: 1px solid #ddd;
+  margin: 12px 0;
+}
+
+.cart-summary {
+  margin-top: 16px;
+  border-top: 1px solid #ddd;
+  padding-top: 12px;
+}
+
+.summary-line {
+  display: flex;
+  justify-content: space-between;
+  margin: 4px 0;
+}
+
+.summary-total {
+  display: flex;
+  justify-content: space-between;
+  font-weight: bold;
+  margin-top: 8px;
+  font-size: 16px;
+}
+
+/* Ajustes generales para el layout */
+.cart-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.delivery-info {
+  margin-top: 16px;
+  font-size: 12px;
+  color: #555;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.see-locations-btn {
+  background: none;
+  color: #007bff;
+  border: none;
+  font-size: 12px;
+  cursor: pointer;
+}
+
+/* Responsiveness */
+@media (max-width: 768px) {
+  .header-actions {
+    gap: 10px;
   }
-  to {
-    transform: rotate(360deg);
+
+  .menu {
+    grid-template-columns: 1fr;
+  }
+
+  .cart {
+    width: 100%;
+    margin-top: 20px;
+  }
+
+  .search-bar input {
+    width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  .header-actions {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .menu-item {
+    width: 100%;
+  }
+
+  .banner h1 {
+    font-size: 2.5rem;
   }
 }
