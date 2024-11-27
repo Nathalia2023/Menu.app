@@ -1,5 +1,5 @@
 import React from "react";
-import "./Filter.css"; // Archivo CSS para los estilos
+import "./Styles/Filter.css"; // Archivo CSS para los estilos
 
 const Section = ({ title, subtitle, products }) => {
   return (
