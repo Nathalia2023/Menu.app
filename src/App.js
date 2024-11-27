@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import Header from './components/Header';
 import Banner from './components/Banner';
-import Menu from './components/Menu';
 import Cart from './components/Cart';
 import Filter from './components/Filter';
 import './App.css';
@@ -43,7 +42,7 @@ const App = () => {
           <Cart cart={cart} deliveryFee={deliveryFee} gst={gst} />
         </div>
         {/* Asegúrate de que `Menu` pueda actualizar el carrito con `setCart` */}
-        <Menu filters={filters} setCart={setCart} />
+       
       </div>
     </div>
   );
