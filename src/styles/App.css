@@ -1,0 +1,88 @@
+@import url(header.css);
+@import url(filter.css);
+@import url(cart.css);
+@import url(menu.css);
+@import url(cartResponsive.css);
+/* Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Arial', sans-serif;
+  background-color: #f8f8f8; /* Color de fondo general */
+}
+.app{
+  display: flex;
+  flex-direction: column;
+  font-family: Arial, sans-serif;
+}
+
+/* Banner */
+.banner {
+  position: relative;
+  text-align: center;
+}
+
+.banner img {
+  width: 100%;
+  height: 400px;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+.banner h1 {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 3rem;
+  color: white;
+  text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.6);
+}
+
+/* Main Content */
+.main-content{
+  display: grid;
+  grid-template-areas:
+    "filters filters cart"
+    "menu menu cart";
+  grid-template-columns: 3fr 1fr; /* El carrito ocupa menos espacio */
+  grid-gap: 20px; /* Espacio entre los elementos */
+  padding: 10px;
+
+}
+
+
+
+
+@media (max-width: 1044px) {
+  .category-buttons{
+    gap: 10px;
+    flex: 2;
+  }
+  .dietary-select{
+    margin-left: 10px;
+    margin-right: 10px;
+  }
+}
+
+
+@media (max-width: 480px) {
+  .banner h1 {
+    font-size: 2.5rem;
+  }
+
+}
+
+@media (max-width: 768px) {
+  .main-content{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  
+  }
+}
+
