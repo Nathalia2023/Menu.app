@@ -233,7 +233,6 @@ nav {
 .auth-buttons {
   display: flex;
 }
-
 @media only screen and (min-width: 1026px) {
   .header-actions .signup {
     display: none;
@@ -248,9 +247,7 @@ nav {
   .header {
     height: 80px;
   }
-
 }
-
 
 @media only screen and (max-width: 769px) {
   .auth-buttons-m .signup-m {
@@ -266,7 +263,7 @@ nav {
   }
 }
 
-@media only screen and (max-width: 425px) {
+@media (max-width: 515px) {
   .logo img {
     width: 120px;
   }
@@ -283,9 +280,56 @@ nav {
     width: 50px;
   }
 }
+@media (max-width: 600px) {
+
+  .order-now {
+    width: 120px;
+    padding: 0;
+    margin: 1rem;
+  }
+
+  .auth-buttons-m .login-m {
+    padding: 0;
+    margin: 0;
+    width: 50px;
+  }
+}
 
 @media only screen and (max-width: 2000px) {
   .quick-quote {
+    display: none;
+  }
+}
+
+@media (max-width: 390px) {
+  .header{
+    padding: 10px 10px;
+  }
+  .order-now{
+    width: 100px;
+    padding: 8px 8px;
+    height: 40px;
+    font-weight: bold;
+    margin: 0 0 0 10px;
+  }
+}
+
+
+
+@media only screen and (max-width: 360px) {
+  .order-now{
+    width: 80px;
+    font-size: 12px;
+    padding: 4px 4px;
+    margin: 0 0 0 25px;
+  }
+  .hamburger div {
+    width: 30px;
+    height: 4px;
+    background: #0A2537;
+    font-weight: bold;
+  }
+  .login-m{
     display: none;
   }
 }

@@ -1,12 +1,30 @@
 /*estilo para carrito de compras*/
 .cart {
     grid-area: cart;
+    position: -webkit-sticky; /* Asegura compatibilidad con Safari */
+    position: sticky;
+    top: 10px; /* Mantiene el carrito a 10px desde la parte superior */
     background-color: #f9f9f9;
     padding: 10px;
     border-radius: 8px;
     width: 320px;
-    position: relative;
+    z-index: 10;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra para elevar el carrito */
+    justify-content: space-between;
+    align-items: baseline;
+    max-height: 90vh; /* Asegura que el carrito no se desplace fuera de la vista */
+    overflow-y: auto; /* Permite desplazamiento interno si el contenido es largo */
 }
+
+/* Asegura que el carrito siga pegajoso en dispositivos móviles */
+@media only screen and (max-width: 768px) {
+    .cart {
+        position: sticky;
+        top: 10px;
+        width: 100%; /* Asegura que se ajuste al 100% del ancho en dispositivos móviles */
+    }
+}
+
 
 .cart-header {
     background-color: #ececec;
@@ -309,5 +327,7 @@
 @media only screen and (max-width: 768px) {
 
 }
+
+
 
   

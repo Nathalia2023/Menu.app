@@ -20,6 +20,7 @@ const CartComponent = ({ cart, deliveryFee, gst }) => {
     const total = subtotal + deliveryFee + gst;
     const totalItems = cart.reduce((acc, item) => acc + item.quantity, 0);
     return (
+        <div className="cart-responsive-parent">
         <div className="container">
             <div className="set-time-btn-container">
                 <button className="set-time-btn">Set Delivery Time(s)</button>
@@ -105,6 +106,7 @@ const CartComponent = ({ cart, deliveryFee, gst }) => {
                 )}
                 <button className="checkout-btn">Checkout</button>
             </div>
+        </div>
         </div>
     );
 };
