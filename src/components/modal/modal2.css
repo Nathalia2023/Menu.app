@@ -1,0 +1,228 @@
+/*Ventana modal 1*/
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.11);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 100;
+  }
+  
+  .modal-content {
+    background: white;
+    border-radius: 8px;
+    position: relative;
+    width: 68%;
+    height: 90%;
+    overflow-y: auto;
+  }
+  
+  .modal-content img {
+    width: 100%;
+  }
+  
+  .image {
+    margin-top: 40px;
+  }
+  
+  .product-modal-content {
+    display: flex;
+    flex-direction: row;
+    gap: 40px;
+    margin: 50px;
+    justify-content: space-between;
+  }
+  
+  .content-text {
+    margin-top: 40px;
+  
+    h1 {
+      margin-bottom: 10px;
+    }
+  
+    .dep-1 {
+      font-size: 1.2rem;
+      border-bottom: 2px solid #ddd;
+      padding-bottom: 15px;
+    }
+  
+    h2 {
+      padding-top: 15px;
+    }
+  
+    .dep-2 {
+      width: 400px
+    }
+  }
+  
+  .content-price {
+    display: flex;
+    justify-content: space-between;
+  
+    .quantity-selector {
+      border-radius: 5px;
+      border: 2px solid #ddd;
+      display: flex;
+      width: 100px;
+    }
+  button{
+      display: flex;
+      flex-direction: row;
+      width: 35px;
+      height: 30px;
+      background: #fff;
+      cursor: pointer;
+      align-items: center;
+      justify-content: center;
+      color: #0073e6;
+      font-size: 1.3rem;
+      font-weight: 600;
+      border: 2px solid #ddd;
+      border-left: none;
+      border-top: none;
+      border-bottom: none;
+  
+  }
+  .btn-more{
+    border-bottom: 1px solid #ddd;
+  }
+  .btn-less{
+    border-top: 1px solid #ddd;
+  }
+    input {
+      width: 61px;
+      text-align: center;
+      border: none;
+      font-size: 1.3rem;
+      font-weight: 600;
+      color: #234861;
+      background: #f0f0f0;
+    }
+  }
+  .container-pay {
+    align-self: flex-end;
+    text-align: right;
+  
+    p{
+      margin: 5px 0 5px 0;
+      font-size: 1.3rem;
+      font-weight: 600;
+    }
+    span{
+      font-size: 12px;
+      color: #aaa9a9;
+      font-weight: bold;  
+  }
+  }
+  .separador {
+    border-bottom: 2px solid #ddd;
+    padding-bottom: 15px;
+    width: 100%;
+  }
+  
+  .modal-close {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background: none;
+    font-size: 1.8rem;
+    cursor: pointer;
+    border: 1px solid #ccc;
+    border-radius: 20px;
+    padding: 3px 10px 3px 10px;
+    color: #007bff;
+    font-weight: 600;
+  }
+  
+  .modal-title {
+    margin-bottom: 1rem;
+  }
+  
+  .footer-card{
+    margin-top: 150px;
+    width: 100%;
+    height: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    border-top: 2px solid #ddd;
+    background-color: #fff;
+    
+    .cont-btn{
+      display: flex;
+      gap: 40px;  
+      margin-right: 20px;
+      background-color: #EFEFF0;
+      padding: 0 3px 0 20px;
+      border-radius: 50px;
+  }
+  p{
+    align-self: center;
+    font-size: 1.2rem;
+    font-weight: bold;
+  }
+  img{
+    width: 24px;
+    height: 24px;
+    align-self: center;
+  }
+  button{
+    padding: 10px 15px 10px 15px;
+    font-size: 1rem;
+    font-weight: 600;
+    color: #fff;
+    background: #94C9EF;
+    height: 50px;
+    border-radius: 50px;
+    border: none;
+    cursor: pointer;
+  }
+  }
+  
+  .product-modal {
+    display: flex;
+    gap: 20px;
+  }
+  
+  .product-modal img {
+    max-width: 150px;
+  }
+  
+  /*Fin de la ventana modal*/
+  
+  
+  @media (max-width: 1024px) {
+    .product-modal-content{
+      gap: 10;
+      flex-direction: column;
+    }
+  
+  }
+  @media (max-width: 480px) 
+  {
+    .modal-content{
+        width: 100%;
+        height: 100%;
+      }
+    
+      .product-modal-content{
+        gap: 0;
+        flex-direction: column;
+        margin: 20px;
+      }
+      .content-text .dep-2{
+        width: 275px;
+      }
+  }
+  @media (max-width: 1420px) {
+    .product-modal-content{
+      gap: 0;
+      flex-direction: column;
+      margin: 30px;
+    }
+  
+  }

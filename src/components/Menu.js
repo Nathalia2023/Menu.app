@@ -1,13 +1,26 @@
-import React from "react";
+import React, { useState } from "react";
+import Modal from "./modal/modal";
 
 const Menu = ({ setCart }) => {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [selectedProduct, setSelectedProduct] = useState(null);
+
+  const handleItemClick = (product) => {
+    setSelectedProduct(product);
+    setIsModalOpen(true);
+  };
+
+  const handleCloseModal = () => {
+    setIsModalOpen(false);
+    setSelectedProduct(null);
+  };
   const categories = [
     {
       id: 1,
       title: "Breakfast and Tea",
       subtitle: "Breakfast and Tea Collections",
       products: [
-        { name: "Breakfast Canapés Collection", price: 48.00, image: "/images/image1.jpg", tags: ["New"], quantity: 8, metadata: ["NF"] },
+        { name: "Breakfast Canapés Collection", price: 48.00, image: "/images/image1.jpg", tags: ["New"], quantity: 8, metadata: ["NF"], intro: "One of the world's favourite Champagnes that will suit any occasion." },
         { name: "Breakfast Pots", price: 8.50, image: "/images/image2.jpg", tags: ["New Flavours"], quantity: 12, metadata: ["V, ", "NF, ", "SF"] },
         { name: "Team Breakfast Collection", price: 78.00, image: "/images/image3.jpg", tags: ["New"], quantity: 6, metadata: ["V, ", "SF"] },
         { name: "Savoury Breakfast Bruschetta and Frittata Collection", price: 129.00, image: "/images/image4.jpg", quantity: 8, metadata: ["NF"] },
@@ -102,7 +115,8 @@ const Menu = ({ setCart }) => {
           <h2>{category.subtitle}</h2>
           <div className="products">
             {category.products.map((product, i) => (
-              <div className="menu-item" key={i}>
+              <div className="menu-item" key={i}
+              onClick={() => handleItemClick(product)}>
                 <div className="image-container">
                   <img src={product.image} alt={product.name} />
                   {product.tags && (
@@ -130,7 +144,51 @@ const Menu = ({ setCart }) => {
                 </div>
               </div>
             ))}
-
+ {selectedProduct && (
+        <Modal isOpen={isModalOpen} onClose={handleCloseModal} >
+          <div className="product-modal-content">
+            <div className="image">
+              <img src={selectedProduct.image} alt={selectedProduct.name} />
+            </div>
+            <div className="content-text">
+            <h1>{selectedProduct.name}</h1>
+            <p className="dep-1">{selectedProduct.intro}</p>
+            <h2>Veuve Cliquot - to taste</h2>
+            <div className="content-price"> 
+            <div className="dep-2">
+            <p>The predominance of Pinot Noir provides the structure 
+            that is so typically Veuve Clicquot, while a touch of 
+            Meunier rounds out the blend. Chardonnay adds the 
+            elegance and finesse essential in a perfectly balanced 
+            wine.</p> <br></br>
+            <p>The wine is characterized by a brilliant golden yellow 
+            color and a fine, persistent effervescence.</p> 
+            </div>
+            <div className="container-pay">
+            <span>excl. GST</span>
+            <p>${selectedProduct.price.toFixed(2)}</p>
+            <div className="quantity-selector">
+              <div className="btn-container">
+              <button className="btn-more">+</button>
+              <button className="btn-less">-</button>
+              </div>
+              <input type="number" value="0" min="100" readOnly />
+            </div>
+            <span>(min 2)</span>
+              </div>
+            </div>
+            <div className="separador"></div>
+            </div>
+          </div>
+          <div className="footer-card"> 
+          <div className="cont-btn">
+            <img src="/images/icons/shopping-cart.svg"></img>
+            <p>$0.00</p>
+            <button>Add To Cart</button>
+          </div>
+          </div>
+        </Modal>
+      )}
           </div>
           <div className="expand-button-container">
             <button className="expand-button">Expand</button>

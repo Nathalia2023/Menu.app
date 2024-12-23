@@ -1,0 +1,272 @@
+/* Cuerpo del modal */
+.modal-body-time {
+  display: flex;
+  gap: 20px;
+  align-items: flex-start; /* Alinear los elementos al principio */
+}
+
+/* Estilo del overlay del modal */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+/* Estilo del contenido del modal */
+.modal-content-time {
+  background: white;
+  padding: 40px; /* Aumentar el padding */
+  border-radius: 8px;
+  width: 800px; /* Aumentar el ancho */
+  max-width: 90%;
+  text-align: center;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  position: relative;
+}
+
+
+/* Estilo para el botón de cerrar */
+.close-button {
+  background: none;
+  border: 2px solid blue; /* Borde azul */
+  border-radius: 50%; /* Hace el borde circular */
+  font-size: 24px;
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  cursor: pointer;
+  width: 40px; /* Ajusta el tamaño del círculo */
+  height: 40px; /* Ajusta el tamaño del círculo */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+
+/* Estilo de los títulos */
+.modal-title {
+  font-size: 22px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.modal-description {
+  font-size: 14px;
+  color: #555;
+  margin-bottom: 5px;
+}
+
+.modal-subdescription {
+  font-size: 12px;
+  color: #999;
+  margin-bottom: 20px;
+}
+
+/* Cuerpo del modal */
+.modal-body-time {
+  display: flex;
+  gap: 20px;
+}
+
+.calendar-container {
+  flex: 1;
+}
+
+.custom-calendar {
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  padding: 10px;
+}
+
+.time-container {
+  flex: 1;
+  text-align: left;
+}
+
+.time-title {
+  font-size: 16px;
+  margin-bottom: 20px;
+  font-weight: bold;
+}
+
+.time-select {
+  width: 90%;
+  padding: 10px;
+  font-size: 14px;
+  border: 1px solid #ccc; /* Borde gris claro */
+  border-radius: 50px; /* Hace el borde ovalado */
+  background-color: #f0f0f0; /* Color de fondo gris claro */
+  cursor: pointer;
+}
+
+
+/* Footer del modal */
+.modal-footer {
+  margin-top: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #f9f9f9;
+  padding: 10px;
+  border-top: 1px solid #ccc;
+}
+
+.selected-info {
+  font-size: 14px;
+  color: #555;
+}
+
+.save-button {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  font-size: 14px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.save-button:hover {
+  background-color: #0056b3;
+}
+
+
+/* Título dinámico del calendario */
+.calendar-header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 10px;
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.calendar-icon {
+  font-size: 20px;
+  color: #007bff;
+  margin-right: 8px;
+}
+
+.calendar-date {
+  color: #333;
+}
+
+
+/* Contenedor del calendario */
+.calendar-container {
+  flex: 1;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+/* Línea divisoria vertical entre calendario y selección de tiempo */
+.divider {
+  width: 1px;
+  background-color: #ccc;
+  height: 100%; /* Asegura que la línea sea del tamaño del contenedor */
+  margin: 0 20px; /* Espaciado entre la línea y los contenedores */
+}
+
+/* Contenedor del tiempo */
+.time-container {
+  flex: 1;
+  text-align: left;
+}
+
+/* Ajustar el diseño del calendario */
+.custom-calendar {
+  width: 100%;
+  max-width: 250px; /* Tamaño reducido */
+  margin: 0 auto;
+  border: none; /* Quitar el borde */
+  box-shadow: none; /* Eliminar cualquier sombra */
+  font-size: 14px; /* Reducir tamaño de fuente */
+}
+
+.custom-calendar .react-calendar__tile {
+  padding: 8px; /* Reducir el padding de los días */
+  font-size: 14px;
+  background: none; /* Quitar fondo por defecto */
+  color: #333;
+}
+
+.custom-calendar .react-calendar__tile--active {
+  background: none; /* Sin fondo al seleccionar */
+  color: #007bff; /* Número en azul al seleccionar */
+  font-weight: bold; /* Resaltar número seleccionado */
+}
+
+.custom-calendar .react-calendar__month-view__days__day:hover {
+  background: #f0f0f0; /* Fondo al pasar el mouse */
+}
+
+.custom-calendar .react-calendar__navigation button {
+  font-size: 14px; /* Reducir tamaño del texto de navegación */
+  padding: 5px; /* Reducir el padding de los botones de navegación */
+}
+
+
+/* Media queries para pantallas móviles */
+@media (max-width: 768px) {
+  .modal-content-time {
+    width: 90%; /* Ajusta el ancho para pantallas pequeñas */
+    padding: 20px; /* Reducir padding */
+  }
+
+  .modal-body-time {
+    flex-direction: column; /* Apilar elementos en lugar de alinearlos en fila */
+    gap: 10px; /* Reducir el espacio entre los elementos */
+  }
+
+  .calendar-container, .time-container {
+    flex: none; /* No tomar más espacio del necesario */
+    width: 100%; /* Asegurarse de que cada sección ocupe el 100% */
+    margin-bottom: 20px;
+  }
+
+  .save-button {
+    width: 100%; /* Hacer el botón de guardar más grande */
+    font-size: 16px; /* Aumentar el tamaño del texto */
+    padding: 15px; /* Hacer el botón más grande */
+  }
+}
+
+
+/* Media queries para pantallas más pequeñas, como smartphones */
+@media (max-width: 480px) {
+  .modal-content-time {
+    width: 100%; /* Hacer el modal más pequeño en pantallas muy pequeñas */
+    padding: 15px; /* Reducir padding */
+  }
+
+  .modal-title {
+    font-size: 18px; /* Reducir tamaño de fuente */
+  }
+
+  .modal-description, .modal-subdescription {
+    font-size: 12px; /* Reducir el tamaño de la fuente */
+  }
+
+  .time-select {
+    font-size: 12px; /* Reducir tamaño de fuente para el selector de tiempo */
+    padding: 8px; /* Reducir padding */
+  }
+
+  .calendar-container {
+    max-width: 300px; /* Ajustar el tamaño del calendario */
+  }
+
+  .save-button {
+    font-size: 14px; /* Reducir tamaño de fuente del botón */
+    padding: 12px; /* Reducir padding del botón */
+  }
+}
+
