@@ -1,220 +1,101 @@
-import React from "react";
-import "./Styles/Filter.css"; // Archivo CSS para los estilos
-
-const Section = ({ title, subtitle, products }) => {
-  return (
-    <div className="menu-section">
-      {/* Título y botón "Browse All" */}
-      <div className="menu-header">
-        <h2>{title}</h2>
-        <button className="browse-button">Browse All</button>
-      </div>
-
-      {/* Subtítulo */}
-      <p className="menu-subtitle">
-        <strong>{subtitle}</strong>
-      </p>
-
-      {/* Productos en dos filas */}
-      <div className="product-grid">
-        {products.slice(0, 5).map((product) => (
-          <div key={product.id} className="product-card">
-            <div className="image-container">
-              <img
-                src={product.image}
-                alt={product.name}
-                className="product-image"
-              />
-              {product.badge && (
-                <span className="product-badge">{product.badge}</span>
-              )}
-            </div>
-            <div className="product-info">
-              <h3 className="product-name">{product.name}</h3>
-              <div className="product-details">
-                <div className="product-quantity">
-                  <img
-                    src="/images/iconopersona.png"
-                    alt="User Icon"
-                    className="user-icon"
-                  />
-                  <span>
-                    {product.quantity} {product.type}
-                  </span>
-                </div>
-                <div className="product-price">{product.price}</div>
-              </div>
-            </div>
-          </div>
-        ))}
-      </div>
-      <div className="product-grid">
-        {products.slice(5, 10).map((product) => (
-          <div key={product.id} className="product-card">
-            <div className="image-container">
-              <img
-                src={product.image}
-                alt={product.name}
-                className="product-image"
-              />
-              {product.badge && (
-                <span className="product-badge">{product.badge}</span>
-              )}
-            </div>
-            <div className="product-info">
-              <h3 className="product-name">{product.name}</h3>
-              <div className="product-details">
-                <div className="product-quantity">
-                  <img
-                    src="/images/iconopersona.png"
-                    alt="User Icon"
-                    className="user-icon"
-                  />
-                  <span>
-                    {product.quantity} {product.type}
-                  </span>
-                </div>
-                <div className="product-price">{product.price}</div>
-              </div>
-            </div>
-          </div>
-        ))}
-      </div>
-
-      {/* Botón Expand */}
-      <button className="expand-button">
-        <img
-          src="/assets/flechaExpand.png"
-          alt="Expand Icon"
-          className="expand-icon"
-        />
-        Expand
-      </button>
-    </div>
-  );
-};
+import React, { useState, useRef, useEffect } from "react";
 
 const FilterSection = () => {
-  // Productos para cada sección
-  const breakfastProducts = [
-    { id: 1, name: "Breakfast Canapes Collection", price: "$10.00", image: "/images/image1.jpg", badge: "New", quantity: 8, type: "NF" },
-    { id: 2, name: "Breakfast Pots", price: "$12.00", image: "/images/image2.jpg", badge: "Top", quantity: 6, type: "V" },
-    { id: 3, name: "Team Breakfast Collection", price: "$10.00", image: "/images/image3.jpg", badge: "New", quantity: 8, type: "NF" },
-    { id: 4, name: "Savoury Breakfast Bruschetta", price: "$12.00", image: "/images/image4.jpg", badge: "Top", quantity: 6, type: "V" },
-    { id: 5, name: "Loaded Mini Muffins", price: "$10.00", image: "/images/image5.jpg", badge: "New", quantity: 8, type: "NF" },
-    { id: 6, name: "Breakfast Pastry Collection", price: "$12.00", image: "/images/image6.jpg", badge: "Top", quantity: 6, type: "V" },
-    { id: 7, name: "Petit Frittata Collection", price: "$10.00", image: "/images/image7.jpg", badge: "New", quantity: 8, type: "NF" },
-    { id: 8, name: "Quiche Collection", price: "$12.00", image: "/images/image8.jpg", badge: "Top", quantity: 6, type: "V" },
-    { id: 9, name: "Savoury Galettes", price: "$10.00", image: "/images/image9.jpg", badge: "New", quantity: 8, type: "NF" },
-    { id: 10, name: "Breakfast Pots", price: "$12.00", image: "/images/image10.jpg", badge: "Top", quantity: 6, type: "V" },
-    
-  ];
+  const [searchQuery, setSearchQuery] = useState("");
+  
+  const contentRef = useRef(null);
 
-  const lunchProducts = [
-    { id: 1, name: "Breakfast Canapes Collection", price: "$10.00", image: "/images/image1.jpg", badge: "New", quantity: 8, type: "NF" },
-    { id: 2, name: "Breakfast Pots", price: "$12.00", image: "/images/image2.jpg", badge: "Top", quantity: 6, type: "V" },
-    { id: 3, name: "Team Breakfast Collection", price: "$10.00", image: "/images/image3.jpg", badge: "New", quantity: 8, type: "NF" },
-    { id: 4, name: "Savoury Breakfast Bruschetta", price: "$12.00", image: "/images/image4.jpg", badge: "Top", quantity: 6, type: "V" },
-    { id: 5, name: "Loaded Mini Muffins", price: "$10.00", image: "/images/image5.jpg", badge: "New", quantity: 8, type: "NF" },
-    { id: 6, name: "Breakfast Pastry Collection", price: "$12.00", image: "/images/image6.jpg", badge: "Top", quantity: 6, type: "V" },
-    { id: 7, name: "Petit Frittata Collection", price: "$10.00", image: "/images/image7.jpg", badge: "New", quantity: 8, type: "NF" },
-    { id: 8, name: "Quiche Collection", price: "$12.00", image: "/images/image8.jpg", badge: "Top", quantity: 6, type: "V" },
-    { id: 9, name: "Savoury Galettes", price: "$10.00", image: "/images/image9.jpg", badge: "New", quantity: 8, type: "NF" },
-    { id: 10, name: "Breakfast Pots", price: "$12.00", image: "/images/image10.jpg", badge: "Top", quantity: 6, type: "V" },
-    
-  ];
+  const handleSearchChange = (e) => {
+    setSearchQuery(e.target.value);
+  };
+  const [showDietaryFilters, setShowDietaryFilters] = useState(false);
+  const toggleDietaryFilters = () => {
+    setShowDietaryFilters(!showDietaryFilters);
+  };
+  
+  const closeDietaryFilters = () => {
+    setShowDietaryFilters(false);
+  };
 
-  const buffetProducts = [
-    { id: 1, name: "Breakfast Canapes Collection", price: "$10.00", image: "/images/image1.jpg", badge: "New", quantity: 8, type: "NF" },
-    { id: 2, name: "Breakfast Pots", price: "$12.00", image: "/images/image2.jpg", badge: "Top", quantity: 6, type: "V" },
-    { id: 3, name: "Savoury Breakfast Bruschetta", price: "$10.00", image: "/images/image3.jpg", badge: "New", quantity: 8, type: "NF" },
-    { id: 4, name: "Savoury Breakfast Bruschetta", price: "$12.00", image: "/images/image4.jpg", badge: "Top", quantity: 6, type: "V" },
-    { id: 5, name: "Loaded Mini Muffins", price: "$10.00", image: "/images/image5.jpg", badge: "New", quantity: 8, type: "NF" },
-    { id: 6, name: "Breakfast Pastry Collection", price: "$12.00", image: "/images/image6.jpg", badge: "Top", quantity: 6, type: "V" },
-    { id: 7, name: "Petit Frittata Collection", price: "$10.00", image: "/images/image7.jpg", badge: "New", quantity: 8, type: "NF" },
-    { id: 8, name: "Quiche Collection", price: "$12.00", image: "/images/image8.jpg", badge: "Top", quantity: 6, type: "V" },
-    { id: 9, name: "Savoury Galettes", price: "$10.00", image: "/images/image9.jpg", badge: "New", quantity: 8, type: "NF" },
-    { id: 10, name: "Breakfast Pots", price: "$12.00", image: "/images/image10.jpg", badge: "Top", quantity: 6, type: "V" },
-    
-  ];
 
-  const fingerFoodProducts = [
-    { id: 1, name: "Breakfast Canapes Collection", price: "$10.00", image: "/images/image1.jpg", badge: "New", quantity: 8, type: "NF" },
-    { id: 2, name: "Breakfast Pots", price: "$12.00", image: "/images/image2.jpg", badge: "Top", quantity: 6, type: "V" },
-    { id: 3, name: "Savoury Breakfast Bruschetta", price: "$10.00", image: "/images/image3.jpg", badge: "New", quantity: 8, type: "NF" },
-    { id: 4, name: "Loaded Mini Muffins", price: "$12.00", image: "/images/image4.jpg", badge: "Top", quantity: 6, type: "V" },
-    { id: 5, name: "Loaded Mini Muffins", price: "$10.00", image: "/images/image5.jpg", badge: "New", quantity: 8, type: "NF" },
-    { id: 6, name: "Breakfast Pastry Collection", price: "$12.00", image: "/images/image6.jpg", badge: "Top", quantity: 6, type: "V" },
-    { id: 7, name: "Petit Frittata Collection", price: "$10.00", image: "/images/image7.jpg", badge: "New", quantity: 8, type: "NF" },
-    { id: 8, name: "Quiche Collection", price: "$12.00", image: "/images/image8.jpg", badge: "Top", quantity: 6, type: "V" },
-    { id: 9, name: "Savoury Galettes", price: "$10.00", image: "/images/image9.jpg", badge: "New", quantity: 8, type: "NF" },
-    { id: 10, name: "Breakfast Pots", price: "$12.00", image: "/images/image10.jpg", badge: "Top", quantity: 6, type: "V" },
-    
-  ];
-
-  const canapesProducts = [
-    { id: 1, name: "Breakfast Canapes Collection", price: "$10.00", image: "/images/image1.jpg", badge: "New", quantity: 8, type: "NF" },
-    { id: 2, name: "Breakfast Pots", price: "$12.00", image: "/images/image2.jpg", badge: "Top", quantity: 6, type: "V" },
-    { id: 3, name: "Savoury Breakfast Bruschetta", price: "$10.00", image: "/images/image3.jpg", badge: "New", quantity: 8, type: "NF" },
-    { id: 4, name: "Loaded Mini Muffins", price: "$12.00", image: "/images/image4.jpg", badge: "Top", quantity: 6, type: "V" },
-    { id: 5, name: "Loaded Mini Muffins", price: "$10.00", image: "/images/image5.jpg", badge: "New", quantity: 8, type: "NF" },
-    { id: 6, name: "Breakfast Pastry Collection", price: "$12.00", image: "/images/image6.jpg", badge: "Top", quantity: 6, type: "V" },
-    { id: 7, name: "Petit Frittata Collection", price: "$10.00", image: "/images/image7.jpg", badge: "New", quantity: 8, type: "NF" },
-    { id: 8, name: "Quiche Collection", price: "$12.00", image: "/images/image8.jpg", badge: "Top", quantity: 6, type: "V" },
-    { id: 9, name: "Savoury Galettes", price: "$10.00", image: "/images/image9.jpg", badge: "New", quantity: 8, type: "NF" },
-    { id: 10, name: "Breakfast Pots", price: "$12.00", image: "/images/image10.jpg", badge: "Top", quantity: 6, type: "V" },
-    
-  ];
+  const scrollContent = (direction) => {
+    if (contentRef.current) {
+      contentRef.current.scrollLeft += direction === "right" ? 800 : -800;
+    }
+  };
 
   return (
-    <div className="menu-page">
-      {/* Filtros */}
-      <div className="filter-section">
-        <div className="search-container">
-          <input
-            type="text"
-            placeholder="Search menu"
-            className="search-input"
-          />
-          
-        </div>
-        <div className="category-buttons">
-          <button className="category-button">Dietary</button>
-          <button className="category-button">Full Menu</button>
-          <button className="category-button">Breakfast & Teas</button>
-          <button className="category-button">Lunches</button>
-          <button className="category-button">Buffets & BBQs</button>
-          <button className="category-button">Finger Food & Platters</button>
-          <button className="category-button">Canapés & Events</button>
-        </div>
+    <div className="filter-section">
+      <div className="search-container">
+        <input
+          type="text"
+          placeholder="Search menu"
+          value={searchQuery}
+          onChange={handleSearchChange}
+          className="search-input"
+        />
       </div>
-
-      {/* Secciones */}
-      <Section
-        title="Breakfast and Tea"
-        subtitle="Breakfast and Tea Collections"
-        products={breakfastProducts}
-      />
-      <Section
-        title="Lunches"
-        subtitle="Lunch Collections"
-        products={lunchProducts}
-      />
-      <Section
-        title="Buffets and BBQ"
-        subtitle="Buffets and BBQ Collections"
-        products={buffetProducts}
-      />
-      <Section
-        title="Finger Food"
-        subtitle="Finger Food Collections"
-        products={fingerFoodProducts}
-      />
-      <Section
-        title="Canapés & Events"
-        subtitle="Canapés & Events Collections"
-        products={canapesProducts}
-      />
+      <div className="select-container">
+        <button
+          className="dietary-select"
+          onClick={toggleDietaryFilters} // Alterna la visibilidad
+        >
+          Dietary <span className="arrow-icon">⮟</span>
+        </button>
+      </div>
+      {showDietaryFilters && (
+        <div className="dietary-filters">
+          <div className="filters-header">
+            <span className="filters-title">Filter by diet</span>
+            <button className="close-button" onClick={closeDietaryFilters}>
+              ✖
+            </button>
+          </div>
+          <div className="filters-list">
+            <label>
+              <input type="checkbox" value="GF" /> Gluten Free
+            </label>
+            <label>
+              <input type="checkbox" value="DF" /> Dairy Free
+            </label>
+            <label>
+              <input type="checkbox" value="V" /> Vegetarian
+            </label>
+            <label>
+              <input type="checkbox" value="VG" /> Vegan
+            </label>
+            <label>
+              <input type="checkbox" value="H" /> Halal Friendly
+            </label>
+            <label>
+              <input type="checkbox" value="CF" /> Capsaicin Free
+            </label>
+            <label>
+              <input type="checkbox" value="AF" /> Allium Free
+            </label>
+            <label>
+              <input type="checkbox" value="SF" /> Sesame Free
+            </label>
+            <label>
+              <input type="checkbox" value="NF" /> Nut Free*
+            </label>
+          </div>
+        </div>
+      )}
+      <div className="arrows-container">
+        <button id="arrow-button-left" onClick={() => scrollContent("left")}></button>
+      </div>
+      <div className="category-buttons-container" ref={contentRef}>
+        <button className="category-button dietary">Full Menu</button>
+        <button className="category-button">Breakfast & Teas</button>
+        <button className="category-button">Lunches</button>
+        <button className="category-button">Buffets & BBQs</button>
+        <button className="category-button">Finger Food & Platters</button>
+        <button className="category-button">Canapés & Events</button>
+      </div>
+      <div className="arrows-container">
+        <button id="arrow-button-right" onClick={() => scrollContent("right")}></button>
+      </div>
     </div>
   );
 };

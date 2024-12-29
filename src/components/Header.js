@@ -1,9 +1,8 @@
-import "./Styles/header.css";
 const Header = () => {
   return (
       <header className="header">
           <div className="logo">
-              <img src="/images/vanilla-blue-logo.png" alt="logo" />
+              <img src="/images/logo/vanilla-blue-logo.png" alt="logo" />
               <button className="order-now">Order now</button>
           </div>
           <div className="header-actions-menu">

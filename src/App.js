@@ -1,9 +1,14 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Header from './components/Header';
 import Banner from './components/Banner';
 import Cart from './components/Cart';
+import CartResponsive from './components/CarritoResponsive';
 import Filter from './components/Filter';
-import './App.css';
+import Menu from './components/Menu';
+import Login from './components/login/Login';
+import './styles/App.css';
+
+
 
 const App = () => {
   const [cart, setCart] = useState([
@@ -25,24 +30,61 @@ const App = () => {
   });
 
   const [showFilters, setShowFilters] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
+  const [showFullCart, setShowFullCart] = useState(false);
+
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth <= 768) {
+        setIsMobile(true);
+      } else {
+        setIsMobile(false);
+      }
+    };
+
+    window.addEventListener('resize', handleResize);
+    handleResize();
+
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
+  const handleCartClick = () => {
+    if (isMobile) {
+      setShowFullCart(false);
+    }
+  };
+
+  const handleFilterToggle = () => {
+    setShowFilters(!showFilters);
+  };
 
   return (
     <div className="app">
+
       <Header />
       <Banner />
+      {/*Contenido de la página*/}
       <div className="main-content">
         <div className="filters-cart-container">
+          {/* Pasamos isMobile como prop a Filter.js */}
           <Filter
             filters={filters}
             setFilters={setFilters}
             showFilters={showFilters}
             setShowFilters={setShowFilters}
+            isMobile={isMobile}
+            handleFilterToggle={handleFilterToggle}
           />
-          {/* Pasamos los datos del carrito al componente */}
-          <Cart cart={cart} deliveryFee={deliveryFee} gst={gst} />
         </div>
-        {/* Asegúrate de que `Menu` pueda actualizar el carrito con `setCart` */}
-       
+        {/* Contenido del menu */}
+        <Menu filters={filters} setCart={setCart} className="menu" />
+        {!isMobile || showFullCart ? (
+          <Cart cart={cart} deliveryFee={deliveryFee} gst={gst} />
+        ) : (
+          <div className="mobile-cart-footer" onClick={handleCartClick}>
+            <CartResponsive cart={cart} deliveryFee={deliveryFee} gst={gst} />
+          </div>
+        )}
       </div>
     </div>
   );

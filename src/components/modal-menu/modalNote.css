@@ -1,0 +1,91 @@
+/*Ventana modal 1*/
+.modal-overlay-note {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.11);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 100;
+}
+
+.container-note {
+    display: flex;
+    flex-direction: column;
+
+}
+
+.modal-content-note {
+    background: white;
+    border-radius: 8px;
+    position: relative;
+    top: 0;
+    left: 0;
+    width: 20%;
+    height: fit-content;
+    overflow-y: auto;
+    border: 2px solid #ccc;
+
+    .btn-close {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        background: none;
+        font-size: 1rem;
+        cursor: pointer;
+        border: 1px solid #ccc;
+        border-radius: 20px;
+        padding: 4px 8px 4px 8px;
+        color: #007bff;
+        font-weight: 600;
+    }
+
+    textarea {
+        font-size: 1rem;
+        border: none;
+        padding: 15px;
+        height: 100px;
+        margin-top: 42px;
+        font-family: Arial, Helvetica, sans-serif;
+        resize: none;
+    }
+}
+
+textarea:focus {
+    border: 1px solid #007bff;
+}
+
+.footer-note {
+    border-top: 2px solid #ddd;
+    background-color: #f0f0f0;
+    height: 80px;
+    display: flex;
+    justify-content: end;
+    align-items: center;
+}
+
+.container-note {
+    display: flex;
+    flex-direction: column;
+}
+
+.modal-content-note .footer-note .btn-add {
+    border-radius: 40px;
+    border: 1px solid black;
+    font-size: 14px;
+    padding: 20px 15px;
+    color: black;
+}
+
+
+@media (max-width: 486px) {
+    .modal-content-note{
+        width: 80%;
+        position: relative;
+        top: 0;
+        left: 0;
+    }
+}

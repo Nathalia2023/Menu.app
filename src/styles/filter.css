@@ -1,0 +1,264 @@
+.filters-cart-container {
+    grid-area: filters;
+}
+
+/* Contenedor principal */
+.filter-section {
+    background-color: #f8f8f8;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+/* Barra de búsqueda */
+.search-container {
+    display: flex;
+    align-items: center;
+    max-width: 250px;
+    /* Ajusta según tu diseño */
+}
+
+.search-input {
+    background: rgba(243, 236, 236, 0.375) url(../../public/images/icons/search.svg) no-repeat 11px 9px;
+    background-size: 20px 20px;
+    text-indent: 1em;
+    display: inline-block;
+    border: 1px solid #ccc;
+    width: 100%;
+    height: 40px;
+    border-radius: 3em;
+    -webkit-transition: .3s;
+    transition: .3s;
+    outline: none;
+    padding: 1em 1.5em;
+    cursor: text;
+    -webkit-appearance: none;
+    font-weight: inherit;
+    font-size: inherit;
+    font-family: inherit;
+    vertical-align: baseline;
+}
+
+/* Botones de categorías */
+.category-buttons-container {
+    display: flex;
+    gap: 20px;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+}
+
+.category-buttons-container::-webkit-scrollbar {
+    display: none;
+}
+
+.category-button {
+    flex: 0 0 auto;
+    padding: 8px 16px;
+    border: none;
+    border-radius: 10px;
+    background-color: #e9e9e9;
+    color: #0A2537;
+    font-weight: bold;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.category-button:hover {
+    background-color: #0A2537;
+    color: #fff;
+}
+
+.category-button.dietary {
+    background-color: #0A2537;
+    color: white;
+}
+
+.dietary-select {
+    background-color: #e9e9e9;
+    background-image: url(../../public/images/icons/slider-blue.png);
+    background-repeat: no-repeat;
+    background-position: 10px;
+    background-size: 20px 20px;
+    padding: 8px 10px 8px 35px;
+    border: 1px #ddd solid;
+    border-radius: 25px;
+    font-size: 14px;
+    margin-left: 20px;
+    width: 130px;
+}
+
+.dietary-select select {
+    text-align: center;
+}
+
+.dietary-select:hover {
+    background-color: #bbb;
+    background-image: url(../../public/images/icons/slider-black.png);
+    background-repeat: no-repeat;
+    background-position: 10px;
+    background-size: 20px 20px;
+}
+
+.dietary-select-icon {
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+
+/*Panel de categorias*/
+.dietary-filters {
+    position: absolute;
+    background: #fff;
+    border: 1px solid #ccc;
+    padding: 16px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    z-index: 10;
+    margin-top: 8px;
+    width: 220px;
+    border-radius: 8px;
+    top: 560px;
+    left: 290px;
+}
+
+/*Fleche del select*/
+.arrows-container {
+    display: flex;
+    justify-content: space-between;
+    margin: 5px;
+}
+
+/* Encabezado de los filtros */
+.filters-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+}
+
+.filters-title {
+    font-size: 16px;
+    font-weight: bold;
+    color: #333; 
+}
+
+.close-button {
+    background: none;
+    border: none;
+    font-size: 16px;
+    cursor: pointer;
+    color: #999;
+    transition: color 0.2s;
+}
+
+.close-button:hover {
+    color: #333;
+}
+
+/* Lista de opciones */
+.filters-list label {
+    display: block;
+    margin: 8px 0;
+    font-size: 14px;
+    color: #555;
+}
+
+.filters-list input[type="checkbox"] {
+    margin-right: 8px;
+}
+
+/*Flechas de desplazamiento*/
+#arrow-button-right {
+    background-color: #f9fbfd;
+    border: 1px #ddd solid;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    background-image: url(../../public/images/icons/arrow-right.svg);
+    background-repeat: no-repeat;
+    background-size: 24px 24px;
+    background-position: 8px;
+}
+
+#arrow-button-left {
+    background-color: #f9fbfd;
+    border: 1px #ddd solid;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: text;
+    background-image: url(../../public/images/icons//arrow-left.svg);
+    background-repeat: no-repeat;
+    background-size: 24px 24px;
+    background-position: 8px;
+}
+
+/**/
+@media only screen and (max-width: 1025px) {
+    .category-buttons-container {
+        gap: 10px;
+    }
+
+    .search-input {
+        width: 0;
+        padding: 0 20px 0 20px;
+        border-radius: 50px;
+        background: #fff url(../../public/images/icons/search.svg) 8px 7px no-repeat;
+    }
+
+    input[type=search]::-webkit-search-cancel-button {
+        -webkit-appearance: none;
+    }
+
+    .search-input:hover,
+    .search-input:focus {
+        background: #fff url(../../public/images/icons/search.svg) 8px 7px no-repeat;
+    }
+
+    .search-input:focus {
+        width: 230px;
+        cursor: pointer;
+    }
+
+    .search-container {
+        max-width: auto;
+    }
+    .dietary-filters{
+        left: 50px;
+    }
+}
+
+@media only screen and (max-width: 768px) {
+    .cart {
+        display: none;
+    }
+
+    .dietary-select {
+        display: block;
+    }
+
+    /* Filtros colapsados cuando no están visibles */
+    .dietary-filters {
+        max-height: fit-content;
+        opacity: 1;
+        pointer-events: all;
+    }
+
+    @media only screen and (max-width: 550px) {
+        .arrows-container {
+            display: none;
+        }
+
+    }
+}

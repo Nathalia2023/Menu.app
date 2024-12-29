@@ -1,0 +1,274 @@
+/* Estilo del overlay del modal */
+.modal-overlay-calendar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+/* Estilo del contenido del modal */
+.modal-content-calendar {
+  background: white;
+  padding: 30px;
+  border-radius: 8px;
+  width: 60%;
+  height: 90%;
+  text-align: center;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  position: relative;
+}
+
+.close-login {
+  background: none;
+  border: 2px solid #EFEFF0;
+  border-radius: 50%;
+  color: #58AFEE;
+  font-size: 24px;
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  cursor: pointer;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-title {
+  font-size: 24px;
+  font-weight: bold;
+  margin-top: 40px;
+  margin-bottom: 10px;
+  color: #0A2537;
+}
+
+.modal-description {
+  font-size: 17px;
+  color: #234861;
+  margin-bottom: 5px;
+}
+
+.modal-subdescription {
+  font-size: 13px;
+  color: #234861;
+  margin-top: 15px;
+  margin-bottom: 20px;
+}
+
+/* Cuerpo del modal */
+.content-calendar{
+
+  display: flex;
+  margin-top: 30px;
+
+}
+
+.calendar-container {
+  justify-items: center;
+  flex: 1;
+  border-right: 1px solid #EFEFF0;
+
+  h3{
+    font-size: 18px;
+    margin-bottom: 15px;
+  }
+}
+.react-calendar{
+  font-size: 1rem;
+  border: none;
+}
+.react-calendar__navigation__next-button, .react-calendar__navigation__prev-button{
+  font-size: 2rem;
+}
+.react-calendar__navigation__next-button, .react-calendar__navigation__prev-button{
+  color: #0A2537;
+}
+.react-calendar__navigation__prev-button:disabled{
+  color: #8a8a8a;
+}
+
+.react-calendar__navigation button:disabled {
+  background-color: transparent;
+}
+
+.react-calendar__navigation__label__labelText--from{
+  color: #0A2537;
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+abbr{
+  text-decoration: none;
+}
+
+.react-calendar .react-calendar__tile--active{
+  padding: 12px 4px;
+  border-radius: 200px;
+  background-color: #fff;
+  border: 2px solid #58AFEE;
+  color: #58AFEE;
+}
+.react-calendar__tile--active:enabled:hover, .react-calendar__tile--active:enabled:focus {
+  background: #58AFEE;
+  color: #fff;
+  border: 2px solid #58AFEE;
+}
+
+.react-calendar__tile:disabled {
+  background-color: transparent;
+  text-decoration: line-through;
+  color: #ababab;
+}
+
+.react-calendar__navigation button:enabled:hover{
+  background-color: transparent;
+}
+.react-calendar__navigation__prev2-button{
+  display: none;
+}
+
+.react-calendar__navigation__next2-button{
+  display: none;
+}
+
+.custom-calendar {
+  border-radius: 8px;
+  padding: 10px;
+}
+
+.time-container {
+  flex: 1;
+  text-align: left;
+  justify-items: center;
+  border-left: 1px solid #EFEFF0;
+}
+
+.time-title {
+  font-size: 18px;
+  margin-bottom: 15px;
+  font-weight: bold;
+}
+
+.time-select {
+  width: 300px;
+  padding: 10px;
+  font-size: 14px;
+  border: 1px solid #ccc; /* Borde gris claro */
+  border-radius: 50px; /* Hace el borde ovalado */
+  background-color: #f0f0f0; /* Color de fondo gris claro */
+  cursor: pointer;
+  margin-bottom: 12px;
+  text-align: left;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+
+
+.times-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.times-filters {
+  position: absolute;
+  background: #fff;
+  border: 1px solid #ccc;
+  padding: 24px 0 16px 0;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  z-index: 10;
+  margin-top: 8px;
+  width: 300px;
+  border-radius: 8px;
+  top: 300px;
+  right: 145px;
+
+  .close-button {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: none;
+    border: 1px solid #EFEFF0;
+    color: #58AFEE;
+    border-radius: 50%;
+    padding: 4px 7px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: color 0.2s;
+}
+}
+
+
+.times-list button {
+  display: block;
+  width: 100%;
+  font-size: 16px;
+  background-color: transparent;
+  border: none;
+  text-align: left;
+  padding: 5px 20px;
+  color: #0A2537;
+  font-weight: 600;
+  
+}
+
+.times-list button:hover {
+  background-color: #f0f0f0;
+}
+
+
+/* Footer del modal */
+.modal-footer {
+  position: absolute;
+  bottom: 10px;
+  right: 0;
+  width: 100%;
+  height: 80px;
+  margin-top: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #f9f9f9;
+  padding: 10px;
+  border-top: 1px solid #ccc;
+}
+
+.selected-info {
+  font-size: 1.4rem;
+  color: #0A2537;
+  margin-left: 25px;
+  font-weight: 600;
+}
+
+.save-button {
+  background-color: #58AFEE;
+  color: white;
+  border: none;
+  padding: 15px 20px;
+  font-size: 14px;
+  border-radius: 15px;
+  cursor: pointer;
+  font-weight: bold;
+  margin-right: 20px;
+}
+
+.save-button:hover {
+  background-color: #0056b3;
+}
+
+
+@media (max-width: 1024px) {
+  .modal-content-calendar {
+    width: 80%;
+  }
+}
