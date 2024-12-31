@@ -23,11 +23,6 @@
 
 
 
-.image {
-  margin-top: 40px;
-  width: 100%;
-}
-
 .product-modal-content {
   display: flex;
   flex-direction: row;
@@ -68,14 +63,33 @@
 
 
 }
-  .imagen{
-    margin-top: 40px;
-    width: 80%;
-     img{
+
+.imagen-modal1 {
+  margin-top: 40px;
+  width: 80%;
+
+  img {
     width: 100%;
   }
+}
+
+.imagen-modal2 {
+  margin-top: 40px;
+  width: 80%;
+
+  img {
+    width: 100%;
   }
- 
+}
+.imagen-modal3{
+  margin-top: 40px;
+  width: 100%;
+
+  img {
+    width: 100%;
+  }
+}
+
 .footer-info {
   display: flex;
   justify-content: end;
@@ -381,16 +395,19 @@
 @media (max-width: 1024px) {
 
   .product-modal-content,
-  .info-modal-content, .extras-container {
+  .info-modal-content,
+  .extras-container {
     gap: 10;
     flex-direction: column;
   }
-  .imagen{
+
+  .imagen {
     margin-top: 40px;
     width: 100%;
-     img{
-    width: 100%;
-  }
+
+    img {
+      width: 100%;
+    }
   }
 }
 
@@ -424,10 +441,20 @@
   .info-modal-content {
     margin: 20px;
   }
- 
 
-  .image {
-    margin-top: 80px;
+
+  .imagen-modal1 {
+    margin-top: 90px;
+    width: 100%;
+  }
+
+  .imagen-modal2{
+    margin-top: 50px;
+    width: 100%;
+  }
+
+  .imagen-modal3{
+    margin-top: 45px;
   }
 
   .product-modal-content h1 {
@@ -456,6 +483,6 @@
   .container-pay {
     margin-right: 20px;
   }
-  
+
 
 }

@@ -4,21 +4,40 @@ import NoteModal from "./modal-menu/noteModal"
 import Login from './login/Login';
 import DeliveryTimeModal from './modal-cart/DeliveryTimeModal';
 
-const Cart = ({ cart, deliveryFee, gst, selectedDate, selectedTime}) => {
 
-  const [quantities, setQuantities] = useState({});
-  const handleIncrease = (productId) => {
-    setQuantities((prevQuantities) => ({
-      ...prevQuantities,
-      [productId]: (prevQuantities[productId] || 0) + 1, // Inicia en 0 ~ Aumenta en 1 al presionar el boton
-    }));
+
+const Cart = ({ cart, deliveryFee, gst }) => {
+
+    const [quantities, setQuantities] = useState({});
+    const [totalQuantity, setTotalQuantity] = useState(0);
+    const [megatotal, setMegatotal] = useState(0);
+
+  const handleIncrease = (productId, price) => {
+    setQuantities((prevQuantities) => {
+      const newQuantity = (prevQuantities[productId] || 0) + 1;
+      setTotalQuantity(totalQuantity + 1); // Aumentar la cantidad total
+      setMegatotal(megatotal + price) // Sumar al subtotal
+      return {
+        ...prevQuantities,
+        [productId]: newQuantity,
+      };
+    });
   };
 
-  const handleDecrease = (productId) => {
-    setQuantities((prevQuantities) => ({
-      ...prevQuantities,
-      [productId]: Math.max((prevQuantities[productId] || 0) - 1, 0), //Inicia en 0 ~ Aumenta en 1 al presionar el boton ~ No permite valores negativos 
-    }));
+  const handleDecrease = (productId, price) => {
+    setQuantities((prevQuantities) => {
+      const currentQuantity = prevQuantities[productId] || 0;
+      if (currentQuantity > 0) { // Solo disminuir si la cantidad actual es mayor que 0
+        const newQuantity = currentQuantity - 1;
+        setTotalQuantity(totalQuantity - 1); // Disminuir la cantidad total
+        setMegatotal(megatotal - price); // Restar del subtotal
+        return {
+          ...prevQuantities,
+          [productId]: newQuantity,
+        };
+      }
+      return prevQuantities; // No hacer nada si la cantidad es 0
+    });
   };
 
 
@@ -96,14 +115,14 @@ const Cart = ({ cart, deliveryFee, gst, selectedDate, selectedTime}) => {
 
 
 
-  {/**Abre la ventana modal */ }
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const handleItemClick = () => {
-    setIsModalOpen(true);
+  {/**Abre la ventana modal de extras */ }
+  const [isModaExtralOpen, setIsModalExtraOpen] = useState(false);
+  const handleExtraClick = () => {
+    setIsModalExtraOpen(true);
   };
 
-  const handleCloseModal = () => {
-    setIsModalOpen(false);
+  const handleCloseModalExtra = () => {
+    setIsModalExtraOpen(false);
   };
 
   {/**Abre la ventana login */ }
@@ -116,15 +135,7 @@ const Cart = ({ cart, deliveryFee, gst, selectedDate, selectedTime}) => {
     setIsLoginOpen(false);
   };
 
-  {/**Abre la ventana Delivery */ }
-  const [isDeliveryOpen, setIsDeliveryOpen] = useState(false);
-  const handleDeliveryOpen = () => {
-    setIsDeliveryOpen(true);
-  };
 
-  const handleDeliveryClose = () => {
-    setIsDeliveryOpen(false);
-  };
 
   const [drinks, setDrinks] = useState([
     {
@@ -183,6 +194,24 @@ const Cart = ({ cart, deliveryFee, gst, selectedDate, selectedTime}) => {
   const total = subtotal + deliveryFee + gst;
   const totalItems = cart.reduce((acc, item) => acc + item.quantity, 0);
 
+
+  const [isDeliveryOpen, setDeliveryOpen] = useState(false);
+  const [selectedDate, setSelectedDate] = useState(null);
+  const [selectedTime, setSelectedTime] = useState('');
+
+  const handleDeliveryOpen = () => setDeliveryOpen(true);
+  const handleDeliveryClose = () => setDeliveryOpen(false);
+
+  const formattedDate = selectedDate
+    ? selectedDate.toLocaleDateString('en-US', {
+        weekday: 'long',
+        day: 'numeric',
+        month: 'short',
+      })
+    : null;
+
+
+
   return (
     <div className='cart-parent-container'>
       <div className="cart">
@@ -194,15 +223,15 @@ const Cart = ({ cart, deliveryFee, gst, selectedDate, selectedTime}) => {
             </div>
             <span className="cart-total">${total.toFixed(2)}</span>
           </div>
-          <button className="checkout-button" onClick={handleItemClick}>Checkout</button>
-          <ModalExtra isOpen={isModalOpen} onClose={handleCloseModal}>
+          <button className="checkout-button" onClick={handleExtraClick}>Checkout</button>
+          <ModalExtra isOpen={isModaExtralOpen} onClose={handleCloseModalExtra}>
             <div className='extras-modal-content'>
               <div className="extras-header">
                 <h1>Before you checkkout, do you want to add any of these extras?</h1>
                 <p> Have a look at these are frequently ordered</p>
                 <div className='btn-skip'>
                   <button onClick={handleLoginOpen}>Skip</button>
-                  <Login isOpen={isLoginOpen} onClose={handleLoginClose}>
+                  <Login isOpenLogin={isLoginOpen} onCloseLogin={handleLoginClose}>
 
                   </Login>
                 </div>
@@ -250,8 +279,8 @@ const Cart = ({ cart, deliveryFee, gst, selectedDate, selectedTime}) => {
                       <p>${drink.price.toFixed(2)}</p>
                       <div className="quantity-selector">
                         <div className="btn-container">
-                          <button className="btn-more" onClick={() => handleIncrease(drink.id)}>+</button>
-                          <button className="btn-less" onClick={() => handleDecrease(drink.id)}>-</button>
+                          <button className="btn-more" onClick={() => handleIncrease(drink.id, drink.price)}>+</button>
+                          <button className="btn-less" onClick={() => handleDecrease(drink.id, drink.price)}>-</button>
                         </div>
                         <input type="number" value={quantities[drink.id] || 0} min="0" readOnly />
                       </div>
@@ -295,8 +324,8 @@ const Cart = ({ cart, deliveryFee, gst, selectedDate, selectedTime}) => {
                             <p>${cut.price.toFixed(2)}</p>
                             <div className="quantity-selector">
                               <div className="btn-container">
-                                <button className="btn-more" onClick={() => handleIncrease(cut.id)}>+</button>
-                                <button className="btn-less" onClick={() => handleDecrease(cut.id)}>-</button>
+                                <button className="btn-more" onClick={() => handleIncrease(cut.id, cut.price)}>+</button>
+                                <button className="btn-less" onClick={() => handleDecrease(cut.id, cut.price)}>-</button>
                               </div>
                               <input type="number" value={quantities[cut.id] || 0} min="0" readOnly />
                             </div>
@@ -311,8 +340,8 @@ const Cart = ({ cart, deliveryFee, gst, selectedDate, selectedTime}) => {
             <div className="footer-info">
               <div className="cont-btn">
                 <img src="/images/icons/shopping-cart.svg"></img>
-                <span className="cart-number">12</span>
-                <p>$579.00</p>
+                <span className="cart-number">{totalQuantity}</span>
+                <p>${megatotal.toFixed(2)}</p>
                 <button className="btn-cart">Add To Cart</button>
               </div>
               <button className='btn-skip'>Skip</button>
@@ -321,15 +350,24 @@ const Cart = ({ cart, deliveryFee, gst, selectedDate, selectedTime}) => {
         </div>
         <div className='delivery-time-btn-container'>
           <button className="delivery-time-btn" onClick={handleDeliveryOpen}>
-            Set Delivery Time(S) {}</button>
-          <DeliveryTimeModal isOpen={isDeliveryOpen} onClose={handleDeliveryClose}>
-
+        {selectedDate && selectedTime
+          ? `${formattedDate} at ${selectedTime}`
+          : 'Set Delivery Time(S)'}
+      </button>
+          <DeliveryTimeModal 
+          isOpen={isDeliveryOpen}
+          onClose={handleDeliveryClose}
+          selectedDate={selectedDate}
+          setSelectedDate={setSelectedDate}
+          selectedTime={selectedTime}
+          setSelectedTime={setSelectedTime}>
+          
             </DeliveryTimeModal>
         </div>
 
         <div className='cart-list-container'>
           <ul className="cart-list">
-            {cart.map((item, index) => (
+          {cart.map((item, index) => (
               <li key={index} className="cart-item">
                 <div className="item-details">
                   <div className="item-header">

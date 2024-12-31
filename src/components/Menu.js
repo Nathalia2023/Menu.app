@@ -11,21 +11,38 @@ const Menu = ({ setCart }) => {
 
   {/*Cantidad de un producto*/ }
   const [quantities, setQuantities] = useState({});
+  const [totalQuantity, setTotalQuantity] = useState(0);
+  const [subtotal, setSubtotal] = useState(0);
 
-
-  const handleIncrease = (productId) => {
-    setQuantities((prevQuantities) => ({
-      ...prevQuantities,
-      [productId]: (prevQuantities[productId] || 0) + 1, // Inicia en 0 ~ Aumenta en 1 al presionar el boton
-    }));
+  const handleIncrease = (productId, price) => {
+    setQuantities((prevQuantities) => {
+      const newQuantity = (prevQuantities[productId] || 0) + 1;
+      setTotalQuantity(totalQuantity + 1); // Aumentar la cantidad total
+      setSubtotal(subtotal + price) // Sumar al subtotal
+      return {
+        ...prevQuantities,
+        [productId]: newQuantity,
+      };
+    });
+  };
+  
+  const handleDecrease = (productId, price) => {
+    setQuantities((prevQuantities) => {
+      const currentQuantity = prevQuantities[productId] || 0;
+      if (currentQuantity > 0) { // Solo disminuir si la cantidad actual es mayor que 0
+        const newQuantity = currentQuantity - 1;
+        setTotalQuantity(totalQuantity - 1); // Disminuir la cantidad total
+        setSubtotal(subtotal - price); // Restar del subtotal
+        return {
+          ...prevQuantities,
+          [productId]: newQuantity,
+        };
+      }
+      return prevQuantities; // No hacer nada si la cantidad es 0
+    });
   };
 
-  const handleDecrease = (productId) => {
-    setQuantities((prevQuantities) => ({
-      ...prevQuantities,
-      [productId]: Math.max((prevQuantities[productId] || 0) - 1, 0), //Inicia en 0 ~ Aumenta en 1 al presionar el boton ~ No permite valores negativos 
-    }));
-  };
+  
 
   {/**Abre la ventana modal (modal1, modal2, modal3)*/ }
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -107,6 +124,7 @@ const getNoteCount = (productId) => {
       title: "Rice Paper Rolls",
       info: "A delicious mix of traditional and modern takes on Vietnamese rice paper rolls",
       subtitle: "Collection. 24 Pieces",
+      price: 109.0,
       image: "/images/rice-paper-rolls.jpg",
       notes: [],
       pieces: [
@@ -150,7 +168,7 @@ const getNoteCount = (productId) => {
       title: "Breakfast and Tea",
       subtitle: "Breakfast and Tea Collections",
       products: [
-        { name: "Breakfast Canapés Collection", price: 48.00, image: "/images/image1.jpg", tags: ["New"], quantity: 8, metadata: ["NF"], intro: "One of the world's favourite Champagnes that will suit any occasion." },
+        { name: "Breakfast Canapés Collection", price: 48.00, image: "/images/image1.jpg", tags: ["New"], quantity: 8, metadata: ["NF"]},
         { name: "Breakfast Pots", price: 8.50, image: "/images/image2.jpg", tags: ["New Flavours"], quantity: 12, metadata: ["V", "NF", "SF"] },
         { name: "Team Breakfast Collection", price: 78.00, image: "/images/image3.jpg", tags: ["New"], quantity: 6, metadata: ["V", "SF"] },
         { name: "Savoury Breakfast Bruschetta and Frittata Collection", price: 129.00, image: "/images/image4.jpg", quantity: 8, metadata: ["NF"] },
@@ -254,7 +272,19 @@ const getNoteCount = (productId) => {
     }
   ]
 
-
+  const drinks = [
+    {
+      id: 1,
+      name: "Veuve Cliquot 750ml",
+      description: "One of the world's favourite Champagnes that will suit any occasion.",
+      image: "/images/champagne-veuve-clicquot.jpg",
+      subname: "Veuve Cliquot - to taste",
+      info1: "The predominance of Pinot Noir provides the structure that is so typically Veuve Clicquot, while a touch of Meunier rounds out the blend. Chardonnay adds the elegance and finesse essential in a perfectly balanced wine.",
+      info2: "The wine is characterized by a brilliant golden yellow lor and a fine, persistent effervescence.",
+      min: 2,
+      price: 109.0,
+    }
+  ]
   return (
 
     <div className="menu">
@@ -298,46 +328,42 @@ const getNoteCount = (productId) => {
                 </div>
               </div>
             ))}
-            {isModalOpen && selectedProduct && ( /** Para usar la ventana modal 3 coloque isOpen={isModalOpen} onClose={handleCloseModal} dentro de <Modal3 ...>*/
-              <Modal3 >
-                <div className="product-modal-content">
-                  <div className="image">
-                    <img src={selectedProduct.image} alt={selectedProduct.name} />
+            {isModalOpen && ( /** Para usar la ventana modal 3 coloque isOpen={isModalOpen} onClose={handleCloseModal} dentro de <Modal3 ...>*/
+              <Modal3  >
+                {drinks.map((drink)=> (
+                  <div className="product-modal-content">
+                  <div className="imagen-modal3">
+                    <img src={drink.image} alt={drink.name} />
                   </div>
                   <div className="content-text">
-                    <h1>{selectedProduct.name}</h1>
-                    <p className="dep-1">{selectedProduct.intro}</p>
-                    <h2>Veuve Cliquot - to taste</h2>
+                    <h1>{drink.name}</h1>
+                    <p className="dep-1">{drink.description}</p>
+                    <h2>{drink.subname}</h2>
                     <div className="content-two">
                       <div className="dep-2">
-                        <p>The predominance of Pinot Noir provides the structure
-                          that is so typically Veuve Clicquot, while a touch of
-                          Meunier rounds out the blend. Chardonnay adds the
-                          elegance and finesse essential in a perfectly balanced
-                          wine.</p> <br></br>
-                        <p>The wine is characterized by a brilliant golden yellow
-                          color and a fine, persistent effervescence.</p>
+                        <p>{drink.info1}</p> <br></br>
+                        <p>{drink.info2}</p>
                       </div>
                       <div className="container-pay">
                         <span>excl. GST</span>
-                        <p>${selectedProduct.price.toFixed(2)}</p>
+                        <p>${drink.price.toFixed(2)}</p>
                         <div className="quantity-selector">
                           <div className="btn-container">
-                            <button className="btn-more" onClick={() => handleIncrease(selectedProduct.id)}>+</button>
-                            <button className="btn-less" onClick={() => handleDecrease(selectedProduct.id)}>-</button>
+                            <button className="btn-more" onClick={() => handleIncrease(drink.id, drink.price)}>+</button>
+                            <button className="btn-less" onClick={() => handleDecrease(drink.id, drink.price)}>-</button>
                           </div>
-                          <input type="number" value={quantities[selectedProduct.id] || 0} min="0" readOnly />
+                          <input type="number" value={quantities[drink.id] || 0} min="0" readOnly />
                         </div>
-                        <span>(min 2)</span>
+                        <span>(min {drink.min})</span>
                       </div>
                     </div>
-
                   </div>
                 </div>
+                ))}
                 <div className="footer-card">
                   <div className="cont-btn">
                     <img src="/images/icons/shopping-cart.svg"></img>
-                    <p>$0.00</p>
+                    <p>${subtotal.toFixed(2)}</p>
                     <button>Add To Cart</button>
                   </div>
                 </div>
@@ -345,13 +371,13 @@ const getNoteCount = (productId) => {
             )}
 
             {selectedProduct && (  /** Para usar la ventana modal 1 coloque isOpen={isModalOpen} onClose={handleCloseModal} dentro de <Modal1 ...> */
-              <Modal1 isOpen={isModalOpen} onClose={handleCloseModal} >
+              <Modal1 isOpen={isModalOpen} onClose={handleCloseModal}>
                 <div className="header-modal">
                   <h1>Rice Paper Rolls</h1>
                 </div>
                 {collections.map((collection) => (
                   <div className="product-modal-content">
-                    <div className="image">
+                    <div className="imagen-modal1">
                       <img src={collection.image} alt={collection.name} />
                     </div>
                     <div className="content-text">
@@ -393,12 +419,12 @@ const getNoteCount = (productId) => {
                         </div>
                         <div className="container-pay">
                           <span>excl. GST</span>
-                          <p>$109.00</p>
+                          <p>${collection.price.toFixed(2)}</p>
                           {collections.map((collection) => (
                             <div className="quantity-selector">
                               <div className="btn-container">
-                                <button className="btn-more" onClick={() => handleIncrease(collection.id)}>+</button>
-                                <button className="btn-less" onClick={() => handleDecrease(collection.id)}>-</button>
+                                <button className="btn-more" onClick={() => handleIncrease(collection.id, collection.price)}>+</button>
+                                <button className="btn-less" onClick={() => handleDecrease(collection.id, collection.price)}>-</button>
                               </div>
                               <input type="number" value={quantities[collection.id] || 0} min="0" readOnly />
                             </div>
@@ -446,8 +472,8 @@ const getNoteCount = (productId) => {
                             <p>${piece.price.toFixed(2)}</p>
                             <div className="quantity-selector">
                               <div className="btn-container">
-                                <button className="btn-more" onClick={() => handleIncrease(piece.id)}>+</button>
-                                <button className="btn-less" onClick={() => handleDecrease(piece.id)}>-</button>
+                                <button className="btn-more" onClick={() => handleIncrease(piece.id, piece.price)}>+</button>
+                                <button className="btn-less" onClick={() => handleDecrease(piece.id, piece.price)}>-</button>
                               </div>
                               <input type="number" value={quantities[piece.id] || 0} min="0" readOnly />
                             </div>
@@ -462,8 +488,8 @@ const getNoteCount = (productId) => {
                 <div className="footer-card" style={{ marginTop: 0 }}>
                   <div className="cont-btn">
                     <img src="/images/icons/shopping-cart.svg"></img>
-                    <span className="cart-number">12</span>
-                    <p>$579.00</p>
+                    <span className="cart-number">{totalQuantity}</span>
+                    <p>${subtotal.toFixed(2)}</p>
                     <button className="btn-note">Add To Cart</button>
                   </div>
                 </div>
@@ -474,7 +500,7 @@ const getNoteCount = (productId) => {
               <Modal2  >
                 {sampleMenu.map((menu)=>(
                   <div className="info-modal-content">
-                  <div className=" imagen">
+                  <div className="imagen-modal2">
                       <img src={menu.image} alt={selectedProduct.name} />
                     </div>
                     <div className="content-text">

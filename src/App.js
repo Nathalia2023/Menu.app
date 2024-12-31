@@ -8,8 +8,6 @@ import Menu from './components/Menu';
 import Login from './components/login/Login';
 import './styles/App.css';
 
-
-
 const App = () => {
   const [cart, setCart] = useState([
     { name: "Scrummy Scones and Sides", price: 6.75, quantity: 18 },
@@ -28,6 +26,15 @@ const App = () => {
     vegetarian: false,
     halalFriendly: false,
   });
+
+      const [isLoginOpen, setIsLoginOpen] = useState(false);
+      const handleLoginOpen = () => {
+          setIsLoginOpen(true);
+      };
+  
+      const handleLoginClose = () => {
+          setIsLoginOpen(false);
+      };
 
   const [showFilters, setShowFilters] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
@@ -86,7 +93,11 @@ const App = () => {
           </div>
         )}
       </div>
+  
+      <Login cart={cart} deliveryFee={deliveryFee} gst={gst} isOpenLogin={isLoginOpen} onCloseLogin={() => setIsLoginOpen(false)} />
+
     </div>
+    
   );
 };
 

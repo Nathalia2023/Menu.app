@@ -3,42 +3,33 @@ import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
 import './DeliveryTimeModal.css';
 
-const DeliveryTimeModal = ({ isOpen, onClose }) => {
-  const [selectedDate, setSelectedDate] = useState(new Date());
-  const [selectedTime, setSelectedTime] = useState('');
+const DeliveryTimeModal = ({ 
+  isOpen, 
+  onClose,
+  selectedDate,
+  setSelectedDate,
+  selectedTime,
+  setSelectedTime, 
+}) => {
 
 
-  const handleSave = () => {
-    setSelectedDate(selectedDate);
-    setSelectedTime(selectedTime);
-    onClose(); // Cierra el modal
-};
 
   const [showTime, setShowTime] = useState(false);
-    const toggleTime = () => {
-      setShowTime(!showTime);
-    };
-    
-    const closeTime = () => {
-      setShowTime(false);
-    };
 
+  const toggleTime = () => setShowTime(!showTime);
+  const closeTime = () => setShowTime(false);
 
   const handleTimeChange = (e) => {
     setSelectedTime(e.target.value);
+    closeTime(); // Cierra la lista de horas
   };
-
-  const formattedDate = selectedDate.toLocaleDateString('en-US', {
-    weekday: 'long',
-    day: 'numeric',
-    month: 'short'
-  });
-
-  const formattedDay = selectedDate.toLocaleDateString('en-US', {
-    weekday: 'short',
-    day: 'numeric',
-    month: 'short'
-  })
+  const formattedDay = selectedDate
+    ? selectedDate.toLocaleDateString('en-US', {
+        weekday: 'short',
+        day: 'numeric',
+        month: 'short',
+      })
+    : '';
 
   if (!isOpen) return null;
 
@@ -62,12 +53,12 @@ const DeliveryTimeModal = ({ isOpen, onClose }) => {
             <Calendar
               onChange={setSelectedDate}
               locale='en-US'
-              value={selectedDate}
+              value={selectedDate || new Date()}
               minDate={new Date()}
               className="custom-calendar"
             />
           </div>
-
+          <div className='dividor'></div>
           {/* Selector de hora */}
           <div className="time-container">
             <h3 className="time-title">Set a time</h3>
@@ -109,10 +100,10 @@ const DeliveryTimeModal = ({ isOpen, onClose }) => {
         <div className="modal-footer">
           <span className="selected-info">
             {selectedDate
-              ? `${formattedDate} at... ${selectedTime}`
+              ? `${formattedDay} at... ${selectedTime}`
               : 'Select a date and time'}
           </span> 
-          <button className="save-button" onClick={handleSave}>
+          <button className="save-button" onClick={onClose}>
             Save Delivery Date & Time(s)
           </button>
         </div>
