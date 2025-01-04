@@ -64,13 +64,29 @@ const Menu = ({ setCart }) => {
   const [isNoteModalOpen, setIsNoteModalOpen] = useState(false);
   const [notes, setNotes] = useState([]);
 
-  const handleOpenNoteModal = () => {
+  const handleOpenNoteModal = (productId) => {
+    setCurrentProductId(productId);
+    const existingNote = getCurrentNote(productId);
     setIsNoteModalOpen(true);
-  };
+};
 
   const handleCloseNoteModal = () => {
     setIsNoteModalOpen(false);
   };
+  
+  const getCurrentNote = (productId) => {
+    for (let collection of collections) {
+        if (collection.id === productId) {
+            return collection.notes[0] || ''; // Devuelve la primera nota de la colección
+        }
+        for (let piece of collection.pieces) {
+            if (piece.id === productId) {
+                return piece.notes[0] || ''; // Devuelve la primera nota del producto
+            }
+        }
+    }
+    return ''; // Devuelve vacío si no hay notas
+};
   const [notesCount, setNotesCount] = useState({});
   const [currentProductId, setCurrentProductId] = useState(null);
 
@@ -78,35 +94,46 @@ const Menu = ({ setCart }) => {
     setCollections((prevCollections) =>
         prevCollections.map((collection) => {
             if (collection.id === productId) {
-                // Agregar nota a la colección principal
-                return {
-                    ...collection,
-                    notes: [...collection.notes, note],
-                };
+                // Si estamos editando una nota existente, modificamos la primera
+                if (collection.notes.length > 0) {
+                    collection.notes[0] = note; // Editamos la primera nota
+                } else {
+                    // Si no existe ninguna, agregamos una nueva nota
+                    collection.notes = [note];
+                }
+                return collection;
             }
-            // Agregar nota a un producto individual dentro de la colección
+
+            // Para los productos dentro de la colección
             const updatedPieces = collection.pieces.map((piece) => {
                 if (piece.id === productId) {
-                    return {
-                        ...piece,
-                        notes: [...piece.notes, note],
-                    };
+                    if (piece.notes.length > 0) {
+                        piece.notes[0] = note; // Editamos la primera nota
+                    } else {
+                        piece.notes = [note];
+                    }
+                    return piece;
                 }
                 return piece;
             });
+
             return {
                 ...collection,
                 pieces: updatedPieces,
             };
         })
     );
-    setIsNoteModalOpen(false); // Cierra el modal después de agregar la nota
+    setIsNoteModalOpen(false); // Cierra el modal después de agregar o editar la nota
 };
+
+
+
 const getNoteCount = (productId) => {
   for (let collection of collections) {
       if (collection.id === productId) {
           return collection.notes.length; // Notas de la colección principal
       }
+      console.log(collection.notes.length)
       for (let piece of collection.pieces) {
           if (piece.id === productId) {
               return piece.notes.length; // Notas de un producto individual
@@ -250,7 +277,6 @@ const getNoteCount = (productId) => {
       ]
     }
   ];
-
   const sampleMenu = [
     {
       id: 1,
@@ -395,8 +421,7 @@ const getNoteCount = (productId) => {
                               <div className="options">
                               <button
                                 onClick={() => {
-                                  setCurrentProductId(collection.id);
-                                  handleOpenNoteModal();
+                                  handleOpenNoteModal(collection.id);
                                 }}
                                 className="btn-note"
                               >
@@ -408,13 +433,15 @@ const getNoteCount = (productId) => {
                                 <NoteModal
                                   isOpen={isNoteModalOpen}
                                   onClose={handleCloseNoteModal}
-                                  onAddNote={(note) => handleAddNote(currentProductId, note)} />
+                                  onAddNote={(note) => handleAddNote(currentProductId, note)}     
+                                  initialNote={getCurrentNote(currentProductId)} 
+                                  productId={currentProductId}
+                                  />
                                 <div className="product-quantity">
                                   <img src="/images/icons/user.svg" alt="User Icon" className="user-icon" />
                                   <p>Serves</p><span>8</span>
                                 </div>
                               </div>
-
                           </div>
                         </div>
                         <div className="container-pay">
@@ -441,8 +468,7 @@ const getNoteCount = (productId) => {
                             <div className="options">
                               <button
                                 onClick={() => {
-                                  setCurrentProductId(piece.id);
-                                  handleOpenNoteModal();
+                                  handleOpenNoteModal(piece.id);
                                 }}
                                 className="btn-note"
                               >
@@ -454,7 +480,8 @@ const getNoteCount = (productId) => {
                               <NoteModal
                                 isOpen={isNoteModalOpen}
                                 onClose={handleCloseNoteModal}
-                                onAddNote={(note) => handleAddNote(currentProductId, note)}
+                                onAddNote={(note) => handleAddNote(currentProductId, note)}     
+                                initialNote={getCurrentNote(currentProductId)} 
                               />
                               <div className="product-quantity">
                                 <img
