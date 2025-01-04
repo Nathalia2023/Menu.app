@@ -1,39 +1,46 @@
-import React, { useState } from 'react';
-import "./modalNote.css"; // Archivo CSS para estilos personalizados
-const NoteModal = ({ isOpen, onClose, onAddNote }) => {
-    const [note, setNote] = useState('');
+import React, { useState, useEffect } from "react";
+import "./modalNote.css";
 
-    const handleNoteChange = (e) => {
-        setNote(e.target.value);
-    };
+const NoteModal = ({ isOpen, onClose, onAddNote, initialNote }) => {
+  const [note, setNote] = useState(initialNote || "");
 
-    const handleAddNote = () => {
-        if (note.trim()) {
-            onAddNote(note);
-            setNote('');
-            onClose();
-        }
-    };
+  // Actualizar el estado de la nota si cambia `initialNote`
+  useEffect(() => {
+    if (isOpen) {
+      setNote(initialNote || "");
+    }
+  }, [initialNote, isOpen])
+  console.log('initial',initialNote);
 
-    return isOpen ? (
-        <div className="modal-overlay-note">
-            <div className="modal-content-note">
-                <div className="btn-close" onClick={onClose}>X</div>
-                <div className='container-note'>
-                <textarea
-                    value={note}
-                    onChange={handleNoteChange}
-                    placeholder="Enter note..."
-                />
-                
-                <div className='footer-note'>
-                <button onClick={handleAddNote} className='btn-add'>Add Note</button>
+  const handleNoteChange = (e) => {
+    setNote(e.target.value);
+  };
 
-                </div>
-                </div>
-            </div>
+  const handleAddNote = () => {
+    if (note.trim()) {
+      onAddNote(note); // Llama al manejador de notas con la nueva nota
+      setNote("");
+      onClose();
+    }
+  };
+
+  return isOpen ? (
+    <div className="modal-overlay-note">
+      <div className="modal-content-note">
+        <div className="btn-close" onClick={onClose}>X</div>
+        <div className="container-note">
+          <textarea
+            value={note}
+            onChange={handleNoteChange}
+            placeholder="Enter note..."
+          />
+          <div className="footer-note">
+            <button onClick={handleAddNote} className="btn-add">Add Note</button>
+          </div>
         </div>
-    ) : null;
+      </div>
+    </div>
+  ) : null;
 };
 
-export default NoteModal; // Asegúrate de exportar con el nuevo nombre
+export default NoteModal;
